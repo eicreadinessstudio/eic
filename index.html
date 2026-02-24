@@ -5,425 +5,480 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EIC Readiness Studio</title>
 
-  <!-- Studio-grade typography (no build tools needed) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Studio palette */
-      --bg0:#070B14;          /* page background */
-      --bg1:#0B1220;          /* panels */
+      --bg:#0B1220;
+      --bg2:#070B14;
+      --text:#F5F6F7;
+      --muted:rgba(245,246,247,.74);
+      --muted2:rgba(245,246,247,.56);
       --card:rgba(255,255,255,.06);
-      --border:rgba(255,255,255,.12);
-      --text:#FFFFFF;
-      --muted:rgba(255,255,255,.72);
-      --muted2:rgba(255,255,255,.55);
-      --accent:#2F6BFF;
-      --accent2:#8BB3FF;
-      --ok:#38D39F;
-      --warn:#FFB020;
-      --shadow: 0 18px 60px rgba(0,0,0,.35);
-      --radius:18px;
-      --radiusLg:22px;
-      --max:1040px;
+      --border:rgba(255,255,255,.10);
+      --accent:#A7D7FF;
+      --accent2:#7FBFFF;
+      --pill:#E9EDF2;
+      --ink:#0B1220;
+      --shadow: 0 18px 60px rgba(0,0,0,.40);
+      --r:18px;
+      --r2:22px;
+      --max:1120px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:
-        radial-gradient(900px 500px at 20% 0%, rgba(47,107,255,.18), transparent 60%),
-        radial-gradient(900px 500px at 80% 10%, rgba(56,211,159,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 60%, var(--bg0) 100%);
+        radial-gradient(1200px 600px at 80% -10%, rgba(167,215,255,.14), transparent 60%),
+        radial-gradient(900px 520px at 10% 0%, rgba(167,215,255,.09), transparent 62%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg) 55%, var(--bg2) 100%);
     }
-
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:56px 20px 44px}
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      margin-bottom:26px;
+    .wrap{max-width:var(--max); margin:0 auto; padding:40px 20px 50px}
+
+    /* Nav */
+    .nav{
+      display:flex; justify-content:space-between; align-items:center; gap:14px;
+      margin-bottom:18px;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      font-family:Sora, Inter, system-ui, sans-serif;
-      letter-spacing:-.02em;
+      font-family:Sora,Inter,system-ui,sans-serif;
       font-weight:700;
-      font-size:18px;
+      letter-spacing:-.02em;
     }
     .dot{
       width:10px; height:10px; border-radius:999px;
-      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-      box-shadow:0 0 0 6px rgba(47,107,255,.15);
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow:0 0 0 7px rgba(167,215,255,.14);
     }
-    .kicker{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 12px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      color:var(--muted);
-      font-size:12px;
-      background:rgba(255,255,255,.04);
-    }
-    .kicker b{color:rgba(255,255,255,.88); font-weight:600}
+    .navLinks{display:flex; gap:14px; flex-wrap:wrap; color:var(--muted2); font-size:13px}
+    .navLinks a{padding:8px 10px; border:1px solid transparent; border-radius:999px}
+    .navLinks a:hover{border-color:var(--border); background:rgba(255,255,255,.03); color:var(--text)}
 
-    .hero{
-      padding:22px 0 8px;
+    /* Layout */
+    .layout{
       display:grid;
       grid-template-columns: 1.25fr .75fr;
-      gap:22px;
+      gap:18px;
       align-items:start;
     }
+
+    /* Left column */
+    .hero{
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      position:relative;
+      min-height:320px;
+      background:
+        linear-gradient(180deg, rgba(11,18,32,.75), rgba(11,18,32,.85)),
+        url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=70") center/cover no-repeat;
+    }
+    .heroInner{padding:26px 24px 18px; position:relative}
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:12.5px;
+    }
+    .kicker b{color:rgba(245,246,247,.92); font-weight:700}
     h1{
-      font-family:Sora, Inter, system-ui, sans-serif;
-      margin:0 0 10px;
+      margin:14px 0 10px;
+      font-family:Sora,Inter,system-ui,sans-serif;
       font-size:44px;
       letter-spacing:-.03em;
       line-height:1.05;
     }
     .sub{
+      margin:0 0 16px;
       color:var(--muted);
-      font-size:18px;
+      font-size:17px;
       line-height:1.55;
       max-width:62ch;
-      margin-bottom:18px;
     }
-
-    .pills{display:flex; gap:10px; flex-wrap:wrap}
-    .pill{
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:13px;
-      color:rgba(255,255,255,.9);
-      background:rgba(255,255,255,.08);
-      border:1px solid var(--border);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .ctaCard{
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      border-radius:var(--radiusLg);
-      padding:18px;
-      box-shadow:var(--shadow);
-    }
-    .ctaTitle{
-      font-family:Sora, Inter, system-ui, sans-serif;
-      font-weight:650;
-      margin:0 0 6px;
-      font-size:14px;
-      color:rgba(255,255,255,.92);
-      letter-spacing:-.01em;
-    }
-    .ctaText{
-      margin:0 0 12px;
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.5;
-    }
-    .ctaRow{display:flex; gap:10px; flex-wrap:wrap}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 12px;
-      border-radius:12px;
-      font-weight:700;
-      font-size:14px;
-      border:1px solid rgba(47,107,255,.45);
-      background:linear-gradient(135deg, rgba(47,107,255,.95), rgba(47,107,255,.72));
-      color:#fff;
-      cursor:pointer;
-    }
-    .btn.secondary{
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      color:rgba(255,255,255,.9);
-      font-weight:650;
-    }
-
-    .sectionTitle{
-      margin:30px 0 12px;
-      font-family:Sora, Inter, system-ui, sans-serif;
-      font-size:16px;
-      letter-spacing:-.01em;
-      color:rgba(255,255,255,.92);
-    }
-
-    /* Pricing: studio cards */
-    .pricingGrid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
+    .pills{
+      display:flex; gap:10px; flex-wrap:wrap;
       margin-top:10px;
     }
-    .card{
+    .pill{
+      background:var(--pill);
+      color:var(--ink);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:13px;
+      font-weight:600;
+    }
+    .heroBottom{
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      margin-top:14px;
+      color:rgba(245,246,247,.80);
+      font-size:13px;
+    }
+    .cta{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(167,215,255,.42);
+      background:rgba(167,215,255,.10);
+      font-weight:700;
+      color:rgba(245,246,247,.95);
+    }
+    .cta:hover{background:rgba(167,215,255,.14)}
+    .cta small{font-weight:700; opacity:.9}
+
+    .grid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    .panel{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:var(--radiusLg);
-      padding:18px;
-      box-shadow: 0 10px 36px rgba(0,0,0,.25);
-      position:relative;
-      overflow:hidden;
+      border-radius:var(--r2);
+      padding:16px;
     }
-    .card:before{
-      content:"";
-      position:absolute; inset:-40px -40px auto auto;
-      width:160px; height:160px;
-      background:radial-gradient(circle at 30% 30%, rgba(47,107,255,.35), transparent 60%);
-      transform:rotate(15deg);
-      pointer-events:none;
-    }
-    .cardHeader{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
-      margin-bottom:6px;
-    }
-    .plan{
-      font-family:Sora, Inter, system-ui, sans-serif;
+    .panel h2{
+      margin:0 0 8px;
+      font-family:Sora,Inter,system-ui,sans-serif;
       font-size:15px;
-      font-weight:650;
       letter-spacing:-.01em;
-      margin:0;
     }
-    .tag{
-      display:inline-flex; align-items:center;
-      padding:4px 8px;
-      border-radius:999px;
-      font-size:12px;
-      color:rgba(255,255,255,.88);
-      background:rgba(255,255,255,.08);
-      border:1px solid var(--border);
-      white-space:nowrap;
-    }
-    .price{
-      font-family:Sora, Inter, system-ui, sans-serif;
-      font-size:28px;
-      font-weight:800;
-      margin:6px 0 8px;
-      letter-spacing:-.02em;
-    }
-    .note{
-      color:var(--muted2);
-      font-size:12.5px;
-      line-height:1.45;
-      margin:0 0 10px;
-    }
-    ul{
+    .panel ul{
       margin:0;
       padding-left:18px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:13.5px;
+    }
+    .panel li{margin:4px 0}
+
+    .process{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:14px;
+    }
+    .step{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--r2);
+      padding:14px;
+    }
+    .step .num{
+      display:inline-flex;
+      width:26px; height:26px;
+      align-items:center; justify-content:center;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:rgba(245,246,247,.9);
+      font-weight:700;
+      font-size:12px;
+      margin-bottom:10px;
+    }
+    .step h3{
+      margin:0 0 6px;
+      font-family:Sora,Inter,system-ui,sans-serif;
+      font-size:14px;
+    }
+    .step p{
+      margin:0;
       color:var(--muted);
       font-size:13.5px;
       line-height:1.55;
     }
-    li{margin:4px 0}
 
-    .popular{
-      border-color: rgba(47,107,255,.55);
-      background: linear-gradient(180deg, rgba(47,107,255,.12), rgba(255,255,255,.06));
-    }
-    .popular .tag{
-      background:rgba(47,107,255,.22);
-      border-color:rgba(47,107,255,.45);
-      color:#cfe0ff;
-    }
-
-    /* Lower panels */
-    .two{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
+    /* Right rail (sticky pricing) */
+    .rail{
+      position:sticky;
+      top:16px;
+      display:flex;
+      flex-direction:column;
       gap:14px;
-      margin-top:18px;
-      align-items:start;
     }
-    .panel{
+    .railCard{
       background:rgba(255,255,255,.06);
       border:1px solid var(--border);
-      border-radius:var(--radiusLg);
-      padding:18px;
+      border-radius:var(--r2);
+      padding:16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.28);
     }
-    .panel h2{
-      font-family:Sora, Inter, system-ui, sans-serif;
-      margin:0 0 10px;
-      font-size:16px;
+    .railTitle{
+      display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+      margin-bottom:10px;
+    }
+    .railTitle h2{
+      margin:0;
+      font-family:Sora,Inter,system-ui,sans-serif;
+      font-size:15px;
       letter-spacing:-.01em;
     }
-    .small{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-      margin:0;
-    }
-    .mini{
+    .railTitle span{color:var(--muted2); font-size:12.5px}
+
+    .plan{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:12px;
+      background:rgba(0,0,0,.14);
       margin-top:10px;
-      color:var(--muted2);
-      font-size:12.5px;
-      line-height:1.5;
+    }
+    .planHeader{display:flex; justify-content:space-between; gap:10px; align-items:flex-start}
+    .planName{font-weight:800; letter-spacing:-.01em}
+    .price{font-family:Sora,Inter,system-ui,sans-serif; font-weight:800}
+    .tag{
+      display:inline-flex;
+      margin-top:6px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(167,215,255,.35);
+      background:rgba(167,215,255,.10);
+      color:rgba(245,246,247,.92);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .plan ul{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
     }
 
-    /* Contact form (AJAX submit, no Formspree thank-you page) */
-    form{display:grid; gap:10px; margin-top:12px}
+    .railActions{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
+    }
+    .btn{
+      display:inline-flex; justify-content:center; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(167,215,255,.42);
+      background:rgba(167,215,255,.10);
+      font-weight:800;
+      cursor:pointer;
+      color:rgba(245,246,247,.95);
+    }
+    .btn:hover{background:rgba(167,215,255,.14)}
+    .btn.secondary{
+      border-color:var(--border);
+      background:rgba(255,255,255,.03);
+      color:rgba(245,246,247,.92);
+      font-weight:700;
+    }
+
+    /* Contact panel */
+    form{display:grid; gap:10px; margin-top:10px}
     input, textarea{
       width:100%;
       padding:12px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.16);
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
       background:rgba(0,0,0,.18);
       color:var(--text);
       font-size:14px;
       outline:none;
     }
-    input::placeholder, textarea::placeholder{color:rgba(255,255,255,.45)}
+    input::placeholder, textarea::placeholder{color:rgba(245,246,247,.45)}
     textarea{min-height:112px; resize:vertical}
-    .formRow{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-    @media (max-width:700px){ .formRow{grid-template-columns:1fr} }
-
-    .formActions{
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
-      margin-top:2px;
-    }
-    .status{
-      font-size:13.5px;
-      color:rgba(255,255,255,.80);
-    }
-    .status.ok{color:rgba(56,211,159,.92)}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:2px}
+    .status{font-size:13.5px; color:var(--muted)}
+    .status.ok{color:rgba(167,215,255,.95)}
     .status.err{color:rgba(255,176,32,.95)}
 
     .footer{
       margin-top:22px;
-      padding-top:16px;
-      border-top:1px solid var(--border);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
       color:var(--muted2);
       font-size:12.5px;
     }
 
-    @media (max-width:980px){
+    @media (max-width: 980px){
+      .layout{grid-template-columns:1fr}
+      .rail{position:relative; top:auto}
+      .process{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
       h1{font-size:38px}
-      .hero{grid-template-columns:1fr}
-      .pricingGrid{grid-template-columns:1fr}
-      .two{grid-template-columns:1fr}
+    }
+    @media (max-width: 640px){
+      .row{grid-template-columns:1fr}
+      .heroInner{padding:22px 18px 16px}
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="topbar">
+
+    <div class="nav">
       <div class="brand"><span class="dot"></span>EIC Readiness Studio</div>
-      <div class="kicker"><b>EIC Accelerator</b> • Stage 1 → Stage 2</div>
+      <div class="navLinks">
+        <a href="#pricing">Pricing</a>
+        <a href="/eic/full-scope.html">Full scope</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
 
-    <div class="hero">
+    <div class="layout">
+
+      <!-- LEFT -->
       <div>
-        <h1>Build an EIC-ready case — fast.</h1>
-        <div class="sub">
-          We build reviewer-ready EIC submissions (story + evidence + execution) with clear scope, fast cycles, and studio-grade clarity.
-        </div>
+        <section class="hero">
+          <div class="heroInner">
+            <span class="kicker"><b>EIC Accelerator</b> • Stage 1 → Stage 2</span>
 
-        <div class="pills">
-          <div class="pill">7-day GO/NO-GO</div>
-          <div class="pill">Evidence-first</div>
-          <div class="pill">Outcome-based tiers</div>
-        </div>
-      </div>
+            <h1>EIC Readiness Studio</h1>
+            <p class="sub">
+              Build an EIC-ready case (story + evidence + execution) — fast, evidence-first, and reviewer-aligned.
+              No form-filling.
+            </p>
 
-      <div class="ctaCard">
-        <div class="ctaTitle">Limited slots per cut-off</div>
-        <p class="ctaText">Start with a fast diagnostic. If it’s a strong GO, we ship Stage 1 assets and activate Stage 2 only by invitation.</p>
-        <div class="ctaRow">
-          <a class="btn" href="#contact">Send a message</a>
-          <a class="btn secondary" href="#pricing">View pricing</a>
-        </div>
-      </div>
-    </div>
+            <div class="pills">
+              <div class="pill">7-day GO/NO-GO</div>
+              <div class="pill">Evidence-first</div>
+              <div class="pill">Outcome tiers</div>
+            </div>
 
-    <div class="sectionTitle" id="pricing">Outcome Ladder (Pricing)</div>
-
-    <div class="pricingGrid">
-      <div class="card">
-        <div class="cardHeader">
-          <h3 class="plan">EIC READY</h3>
-          <span class="tag">7 days</span>
-        </div>
-        <div class="price">€1,200</div>
-        <p class="note">Best for: fast GO/NO-GO before committing time and budget.</p>
-        <ul>
-          <li>GO/NO-GO verdict + EIC Fit Score</li>
-          <li>Evidence gaps + reviewer objections</li>
-          <li>30/60-day action plan</li>
-        </ul>
-      </div>
-
-      <div class="card popular">
-        <div class="cardHeader">
-          <h3 class="plan">EIC SUBMIT-READY</h3>
-          <span class="tag">Stage 1</span>
-        </div>
-        <div class="price">€4,900</div>
-        <p class="note">Best for: Stage 1 assets that are reviewer-ready and easy to understand.</p>
-        <ul>
-          <li>Stage 1 narrative + pitch deck polish</li>
-          <li>Video script + storyboard</li>
-          <li>Video Clarity Lab post-production</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="cardHeader">
-          <h3 class="plan">EIC INVESTMENT-READY</h3>
-          <span class="tag">Stage 2</span>
-        </div>
-        <div class="price">€6,900</div>
-        <p class="note">By invitation after Stage 1. Optional success fee (case-by-case, agreed upfront).</p>
-        <ul>
-          <li>Full proposal: Excellence / Impact / Implementation</li>
-          <li>Coherence Check + Red-Team Review</li>
-          <li>Up to 2 revision rounds + final QA</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="two">
-      <div class="panel">
-        <h2>How it works</h2>
-        <p class="small">
-          We run a fast diagnostic, ship Stage 1 assets, and activate Stage 2 only if you are invited to submit the full proposal.
-          Clear scope, fast cycles, and reviewer-aligned outputs.
-        </p>
-        <div class="mini">
-          Studio workflow: structured intake → drafting → QA → submission-ready assets.
-        </div>
-      </div>
-
-      <div class="panel" id="contact">
-        <h2>Contact</h2>
-        <p class="small">Send a message — we’ll reply with next steps.</p>
-
-        <!-- IMPORTANT: keep only this endpoint (do not wrap it in anything else) -->
-        <form id="contactForm" action="https://formspree.io/f/xvzbdzwj" method="POST">
-          <div class="formRow">
-            <input type="text" name="name" placeholder="Your name" required />
-            <input type="email" name="email" placeholder="Email" required />
+            <div class="heroBottom">
+              <div>Limited slots per cut-off</div>
+              <a class="cta" href="#contact">Book EIC Ready <small>→</small></a>
+            </div>
           </div>
-          <input type="text" name="company" placeholder="Company (optional)" />
-          <textarea name="message" placeholder="Message" required></textarea>
+        </section>
 
-          <div class="formActions">
-            <button class="btn" type="submit">Send message</button>
-            <span id="formStatus" class="status"></span>
+        <div class="grid2" style="margin-top:14px;">
+          <div class="panel">
+            <h2>Why many EIC applications fail</h2>
+            <ul>
+              <li>“Take anyone” retainers with misaligned incentives</li>
+              <li>Black-box drafting and generic narratives</li>
+              <li>Missing evidence, weak validation, unclear pathway</li>
+            </ul>
           </div>
-        </form>
 
-        <div class="mini">
-          No email address displayed on the site. Messages are delivered via the contact form.
+          <div class="panel">
+            <h2>Our approach</h2>
+            <ul>
+              <li>Reviewer logic first (what must be true)</li>
+              <li>Evidence gaps mapped and closed systematically</li>
+              <li>Fast cycles + tight scope + QA</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="process">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>EIC READY</h3>
+            <p>GO/NO-GO + Fit Score + evidence gaps + 30/60-day plan.</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>SUBMIT-READY (Stage 1)</h3>
+            <p>Narrative + pitch + video pack with “Video Clarity Lab” post-production.</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>INVESTMENT-READY (Stage 2)</h3>
+            <p>Full proposal + Coherence Check + Red-Team Review (by invitation).</p>
+          </div>
         </div>
       </div>
+
+      <!-- RIGHT (sticky rail) -->
+      <aside class="rail" id="pricing">
+        <div class="railCard">
+          <div class="railTitle">
+            <h2>Outcome Ladder</h2>
+            <span>Fixed scope</span>
+          </div>
+
+          <div class="plan">
+            <div class="planHeader">
+              <div class="planName">EIC READY</div>
+              <div class="price">€1,200</div>
+            </div>
+            <div class="tag">7 days</div>
+            <ul>
+              <li>GO/NO-GO + Fit Score</li>
+              <li>Evidence gaps</li>
+              <li>Action plan</li>
+            </ul>
+          </div>
+
+          <div class="plan">
+            <div class="planHeader">
+              <div class="planName">EIC SUBMIT-READY</div>
+              <div class="price">€4,900</div>
+            </div>
+            <div class="tag">Stage 1</div>
+            <ul>
+              <li>Narrative + pitch deck polish</li>
+              <li>Video script + storyboard</li>
+              <li>Video Clarity Lab post-production</li>
+            </ul>
+          </div>
+
+          <div class="plan">
+            <div class="planHeader">
+              <div class="planName">EIC INVESTMENT-READY</div>
+              <div class="price">€6,900</div>
+            </div>
+            <div class="tag">Stage 2 (invitation)</div>
+            <ul>
+              <li>Excellence / Impact / Implementation</li>
+              <li>Coherence Check + Red-Team Review</li>
+              <li>+ success fee (agreed upfront)</li>
+            </ul>
+          </div>
+
+          <div class="railActions">
+            <a class="btn secondary" href="/eic/full-scope.html">Full scope</a>
+            <a class="btn" href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div class="railCard" id="contact">
+          <div class="railTitle">
+            <h2>Contact</h2>
+            <span>We reply fast</span>
+          </div>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:13.5px; line-height:1.5;">
+            Send a message — we’ll reply with next steps.
+          </p>
+
+          <form id="contactForm" action="https://formspree.io/f/xvzbdzwj" method="POST">
+            <div class="row">
+              <input type="text" name="name" placeholder="Your name" required />
+              <input type="email" name="email" placeholder="Email" required />
+            </div>
+            <input type="text" name="company" placeholder="Company (optional)" />
+            <textarea name="message" placeholder="Message" required></textarea>
+
+            <div class="actions">
+              <button class="btn" type="submit">Send message</button>
+              <span id="formStatus" class="status"></span>
+            </div>
+          </form>
+
+          <div style="margin-top:10px; color:var(--muted2); font-size:12.5px; line-height:1.5;">
+            For privacy, we don’t display an email address publicly.
+          </div>
+        </div>
+      </aside>
+
     </div>
 
     <div class="footer">
@@ -433,10 +488,9 @@
   </div>
 
   <script>
-    // Footer year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // AJAX submit to avoid Formspree "thank you" page / locale issues
+    // AJAX submit: keeps user on your site + English status message (no Formspree thank-you page)
     (function () {
       const form = document.getElementById("contactForm");
       const statusEl = document.getElementById("formStatus");
@@ -444,19 +498,18 @@
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
         statusEl.className = "status";
         statusEl.textContent = "Sending…";
 
         try {
           const formData = new FormData(form);
-          const response = await fetch(form.action, {
+          const res = await fetch(form.action, {
             method: "POST",
             body: formData,
             headers: { "Accept": "application/json" }
           });
 
-          if (response.ok) {
+          if (res.ok) {
             statusEl.className = "status ok";
             statusEl.textContent = "Thank you! Your message has been sent.";
             form.reset();
