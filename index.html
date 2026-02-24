@@ -4,86 +4,355 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EIC Readiness Studio</title>
+
+  <!-- Studio-grade typography (no build tools needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0B1220;
-      --card:#111A2E;
-      --text:#FFFFFF;
-      --muted:#C7CEDB;
-      --accent:#2F6BFF;
-      --soft:#F6F7FB;
-      --ink:#0B1220;
+      /* Studio palette */
+      --bg0:#070B14;          /* page background */
+      --bg1:#0B1220;          /* panels */
+      --card:rgba(255,255,255,.06);
       --border:rgba(255,255,255,.12);
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.55);
+      --accent:#2F6BFF;
+      --accent2:#8BB3FF;
+      --ok:#38D39F;
+      --warn:#FFB020;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius:18px;
+      --radiusLg:22px;
+      --max:1040px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    a{color:inherit}
-    .wrap{max-width:980px;margin:0 auto;padding:48px 20px}
-    .hero{padding:28px 0 10px}
-    .kicker{display:inline-block;padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:12px}
-    h1{margin:14px 0 10px;font-size:44px;letter-spacing:-.02em}
-    .sub{max-width:760px;color:var(--muted);font-size:18px;line-height:1.5}
-    .pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-    .pill{background:rgba(255,255,255,.10);border:1px solid var(--border);padding:8px 12px;border-radius:999px;font-size:13px;color:var(--text)}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
-    .card{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:18px;padding:18px}
-    .card h3{margin:0 0 6px;font-size:16px}
-    .price{font-size:28px;font-weight:700;margin:6px 0 10px}
-    .badge{display:inline-block;background:rgba(47,107,255,.18);color:#BFD2FF;border:1px solid rgba(47,107,255,.35);padding:4px 8px;border-radius:999px;font-size:12px;margin-left:8px}
-    ul{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.5}
-    .two{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:28px;align-items:start}
-    .panel{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:18px;padding:18px}
-    .panel h2{margin:0 0 10px;font-size:18px}
-    .small{color:var(--muted);font-size:14px;line-height:1.6}
-    form{display:grid;gap:10px;margin-top:10px}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(47,107,255,.18), transparent 60%),
+        radial-gradient(900px 500px at 80% 10%, rgba(56,211,159,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 60%, var(--bg0) 100%);
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:56px 20px 44px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom:26px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-family:Sora, Inter, system-ui, sans-serif;
+      letter-spacing:-.02em;
+      font-weight:700;
+      font-size:18px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      box-shadow:0 0 0 6px rgba(47,107,255,.15);
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      color:var(--muted);
+      font-size:12px;
+      background:rgba(255,255,255,.04);
+    }
+    .kicker b{color:rgba(255,255,255,.88); font-weight:600}
+
+    .hero{
+      padding:22px 0 8px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:22px;
+      align-items:start;
+    }
+    h1{
+      font-family:Sora, Inter, system-ui, sans-serif;
+      margin:0 0 10px;
+      font-size:44px;
+      letter-spacing:-.03em;
+      line-height:1.05;
+    }
+    .sub{
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.55;
+      max-width:62ch;
+      margin-bottom:18px;
+    }
+
+    .pills{display:flex; gap:10px; flex-wrap:wrap}
+    .pill{
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      color:rgba(255,255,255,.9);
+      background:rgba(255,255,255,.08);
+      border:1px solid var(--border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .ctaCard{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      border-radius:var(--radiusLg);
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .ctaTitle{
+      font-family:Sora, Inter, system-ui, sans-serif;
+      font-weight:650;
+      margin:0 0 6px;
+      font-size:14px;
+      color:rgba(255,255,255,.92);
+      letter-spacing:-.01em;
+    }
+    .ctaText{
+      margin:0 0 12px;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:700;
+      font-size:14px;
+      border:1px solid rgba(47,107,255,.45);
+      background:linear-gradient(135deg, rgba(47,107,255,.95), rgba(47,107,255,.72));
+      color:#fff;
+      cursor:pointer;
+    }
+    .btn.secondary{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      color:rgba(255,255,255,.9);
+      font-weight:650;
+    }
+
+    .sectionTitle{
+      margin:30px 0 12px;
+      font-family:Sora, Inter, system-ui, sans-serif;
+      font-size:16px;
+      letter-spacing:-.01em;
+      color:rgba(255,255,255,.92);
+    }
+
+    /* Pricing: studio cards */
+    .pricingGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:10px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radiusLg);
+      padding:18px;
+      box-shadow: 0 10px 36px rgba(0,0,0,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-40px -40px auto auto;
+      width:160px; height:160px;
+      background:radial-gradient(circle at 30% 30%, rgba(47,107,255,.35), transparent 60%);
+      transform:rotate(15deg);
+      pointer-events:none;
+    }
+    .cardHeader{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      margin-bottom:6px;
+    }
+    .plan{
+      font-family:Sora, Inter, system-ui, sans-serif;
+      font-size:15px;
+      font-weight:650;
+      letter-spacing:-.01em;
+      margin:0;
+    }
+    .tag{
+      display:inline-flex; align-items:center;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:12px;
+      color:rgba(255,255,255,.88);
+      background:rgba(255,255,255,.08);
+      border:1px solid var(--border);
+      white-space:nowrap;
+    }
+    .price{
+      font-family:Sora, Inter, system-ui, sans-serif;
+      font-size:28px;
+      font-weight:800;
+      margin:6px 0 8px;
+      letter-spacing:-.02em;
+    }
+    .note{
+      color:var(--muted2);
+      font-size:12.5px;
+      line-height:1.45;
+      margin:0 0 10px;
+    }
+    ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      font-size:13.5px;
+      line-height:1.55;
+    }
+    li{margin:4px 0}
+
+    .popular{
+      border-color: rgba(47,107,255,.55);
+      background: linear-gradient(180deg, rgba(47,107,255,.12), rgba(255,255,255,.06));
+    }
+    .popular .tag{
+      background:rgba(47,107,255,.22);
+      border-color:rgba(47,107,255,.45);
+      color:#cfe0ff;
+    }
+
+    /* Lower panels */
+    .two{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      margin-top:18px;
+      align-items:start;
+    }
+    .panel{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      border-radius:var(--radiusLg);
+      padding:18px;
+    }
+    .panel h2{
+      font-family:Sora, Inter, system-ui, sans-serif;
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:-.01em;
+    }
+    .small{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+      margin:0;
+    }
+    .mini{
+      margin-top:10px;
+      color:var(--muted2);
+      font-size:12.5px;
+      line-height:1.5;
+    }
+
+    /* Contact form (AJAX submit, no Formspree thank-you page) */
+    form{display:grid; gap:10px; margin-top:12px}
     input, textarea{
       width:100%;
       padding:12px 12px;
       border-radius:12px;
-      border:1px solid rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.16);
       background:rgba(0,0,0,.18);
       color:var(--text);
       font-size:14px;
       outline:none;
     }
-    textarea{min-height:110px;resize:vertical}
-    button{
-      cursor:pointer;
-      border:none;
-      border-radius:12px;
-      padding:12px 14px;
-      background:var(--accent);
-      color:white;
-      font-weight:700;
-      font-size:14px;
+    input::placeholder, textarea::placeholder{color:rgba(255,255,255,.45)}
+    textarea{min-height:112px; resize:vertical}
+    .formRow{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    @media (max-width:700px){ .formRow{grid-template-columns:1fr} }
+
+    .formActions{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      margin-top:2px;
     }
-    .footer{margin-top:26px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    @media (max-width:900px){
-      h1{font-size:36px}
-      .grid{grid-template-columns:1fr}
+    .status{
+      font-size:13.5px;
+      color:rgba(255,255,255,.80);
+    }
+    .status.ok{color:rgba(56,211,159,.92)}
+    .status.err{color:rgba(255,176,32,.95)}
+
+    .footer{
+      margin-top:22px;
+      padding-top:16px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      color:var(--muted2);
+      font-size:12.5px;
+    }
+
+    @media (max-width:980px){
+      h1{font-size:38px}
+      .hero{grid-template-columns:1fr}
+      .pricingGrid{grid-template-columns:1fr}
       .two{grid-template-columns:1fr}
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
+    <div class="topbar">
+      <div class="brand"><span class="dot"></span>EIC Readiness Studio</div>
+      <div class="kicker"><b>EIC Accelerator</b> • Stage 1 → Stage 2</div>
+    </div>
+
     <div class="hero">
-      <span class="kicker">EIC Accelerator • Stage 1 → Stage 2</span>
-      <h1>EIC Readiness Studio</h1>
-      <div class="sub">
-        Build an EIC-ready case (story + evidence + execution) — fast, evidence-first, and reviewer-aligned.
+      <div>
+        <h1>Build an EIC-ready case — fast.</h1>
+        <div class="sub">
+          We build reviewer-ready EIC submissions (story + evidence + execution) with clear scope, fast cycles, and studio-grade clarity.
+        </div>
+
+        <div class="pills">
+          <div class="pill">7-day GO/NO-GO</div>
+          <div class="pill">Evidence-first</div>
+          <div class="pill">Outcome-based tiers</div>
+        </div>
       </div>
-      <div class="pills">
-        <div class="pill">7-day GO/NO-GO</div>
-        <div class="pill">Evidence-first</div>
-        <div class="pill">Outcome-based tiers</div>
+
+      <div class="ctaCard">
+        <div class="ctaTitle">Limited slots per cut-off</div>
+        <p class="ctaText">Start with a fast diagnostic. If it’s a strong GO, we ship Stage 1 assets and activate Stage 2 only by invitation.</p>
+        <div class="ctaRow">
+          <a class="btn" href="#contact">Send a message</a>
+          <a class="btn secondary" href="#pricing">View pricing</a>
+        </div>
       </div>
     </div>
 
-    <div class="grid" id="pricing">
+    <div class="sectionTitle" id="pricing">Outcome Ladder (Pricing)</div>
+
+    <div class="pricingGrid">
       <div class="card">
-        <h3>EIC READY <span class="badge">7 days</span></h3>
+        <div class="cardHeader">
+          <h3 class="plan">EIC READY</h3>
+          <span class="tag">7 days</span>
+        </div>
         <div class="price">€1,200</div>
+        <p class="note">Best for: fast GO/NO-GO before committing time and budget.</p>
         <ul>
           <li>GO/NO-GO verdict + EIC Fit Score</li>
           <li>Evidence gaps + reviewer objections</li>
@@ -91,9 +360,13 @@
         </ul>
       </div>
 
-      <div class="card">
-        <h3>EIC SUBMIT-READY <span class="badge">Stage 1</span></h3>
+      <div class="card popular">
+        <div class="cardHeader">
+          <h3 class="plan">EIC SUBMIT-READY</h3>
+          <span class="tag">Stage 1</span>
+        </div>
         <div class="price">€4,900</div>
+        <p class="note">Best for: Stage 1 assets that are reviewer-ready and easy to understand.</p>
         <ul>
           <li>Stage 1 narrative + pitch deck polish</li>
           <li>Video script + storyboard</li>
@@ -102,9 +375,12 @@
       </div>
 
       <div class="card">
-        <h3>EIC INVESTMENT-READY <span class="badge">Stage 2</span></h3>
+        <div class="cardHeader">
+          <h3 class="plan">EIC INVESTMENT-READY</h3>
+          <span class="tag">Stage 2</span>
+        </div>
         <div class="price">€6,900</div>
-        <div class="small">By invitation after Stage 1. Optional success fee (case-by-case, agreed upfront).</div>
+        <p class="note">By invitation after Stage 1. Optional success fee (case-by-case, agreed upfront).</p>
         <ul>
           <li>Full proposal: Excellence / Impact / Implementation</li>
           <li>Coherence Check + Red-Team Review</li>
@@ -116,62 +392,84 @@
     <div class="two">
       <div class="panel">
         <h2>How it works</h2>
-        <div class="small">
+        <p class="small">
           We run a fast diagnostic, ship Stage 1 assets, and activate Stage 2 only if you are invited to submit the full proposal.
           Clear scope, fast cycles, and reviewer-aligned outputs.
+        </p>
+        <div class="mini">
+          Studio workflow: structured intake → drafting → QA → submission-ready assets.
         </div>
       </div>
 
       <div class="panel" id="contact">
         <h2>Contact</h2>
-        <div class="small">Send a message and we’ll reply with next steps.</div>
+        <p class="small">Send a message — we’ll reply with next steps.</p>
 
-        <!-- Replace the action URL with your Formspree endpoint -->
+        <!-- IMPORTANT: keep only this endpoint (do not wrap it in anything else) -->
         <form id="contactForm" action="https://formspree.io/f/xvzbdzwj" method="POST">
-          <p id="formStatus" style="margin:10px 0 0; color:rgba(255,255,255,.8); font-size:14px;"></p>
-          <input type="hidden" name="_next" value="https://eicreadinessstudio.github.io/eic/thanks.html?v=2">
-          <input type="hidden" name="_subject" value="New message — EIC Readiness Studio">
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="email" name="email" placeholder="Email" required />
+          <div class="formRow">
+            <input type="text" name="name" placeholder="Your name" required />
+            <input type="email" name="email" placeholder="Email" required />
+          </div>
           <input type="text" name="company" placeholder="Company (optional)" />
           <textarea name="message" placeholder="Message" required></textarea>
-          <button type="submit">Send message</button>
+
+          <div class="formActions">
+            <button class="btn" type="submit">Send message</button>
+            <span id="formStatus" class="status"></span>
+          </div>
         </form>
+
+        <div class="mini">
+          No email address displayed on the site. Messages are delivered via the contact form.
+        </div>
       </div>
     </div>
 
     <div class="footer">
-      <div>Contact: <a href="mailto:piszagnieszkaanna@gmail.com">piszagnieszkaanna@gmail.com</a></div>
-      <div>Limited slots per cut-off</div>
+      <div>© <span id="y"></span> EIC Readiness Studio</div>
+      <div>Built on GitHub Pages • Contact via form</div>
     </div>
   </div>
+
   <script>
-  const form = document.getElementById("contactForm");
-  const statusEl = document.getElementById("formStatus");
+    // Footer year
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    // AJAX submit to avoid Formspree "thank you" page / locale issues
+    (function () {
+      const form = document.getElementById("contactForm");
+      const statusEl = document.getElementById("formStatus");
+      if (!form || !statusEl) return;
 
-    statusEl.textContent = "Sending…";
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    try {
-      const formData = new FormData(form);
-      const response = await fetch(form.action, {
-        method: "POST",
-        body: formData,
-        headers: { "Accept": "application/json" }
+        statusEl.className = "status";
+        statusEl.textContent = "Sending…";
+
+        try {
+          const formData = new FormData(form);
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (response.ok) {
+            statusEl.className = "status ok";
+            statusEl.textContent = "Thank you! Your message has been sent.";
+            form.reset();
+          } else {
+            statusEl.className = "status err";
+            statusEl.textContent = "Something went wrong. Please try again.";
+          }
+        } catch (err) {
+          statusEl.className = "status err";
+          statusEl.textContent = "Network error. Please try again.";
+        }
       });
-
-      if (response.ok) {
-        statusEl.textContent = "Thank you! Your message has been sent.";
-        form.reset();
-      } else {
-        statusEl.textContent = "Sorry — something went wrong. Please try again or email us directly.";
-      }
-    } catch (err) {
-      statusEl.textContent = "Network error — please try again or email us directly.";
-    }
-  });
-</script>
+    })();
+  </script>
 </body>
 </html>
