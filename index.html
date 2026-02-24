@@ -5,211 +5,275 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EIC Readiness Studio</title>
 
-  <!-- Studio-grade typography (no build tools needed) -->
+  <!-- Display + text fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Studio palette */
-      --bg0:#070B14;          /* page background */
-      --bg1:#0B1220;          /* panels */
-      --card:rgba(255,255,255,.06);
-      --border:rgba(255,255,255,.12);
-      --text:#FFFFFF;
-      --muted:rgba(255,255,255,.72);
-      --muted2:rgba(255,255,255,.55);
-      --accent:#2F6BFF;
-      --accent2:#8BB3FF;
-      --ok:#38D39F;
-      --warn:#FFB020;
-      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --bg:#070809;
+      --bg2:#0B0D0F;
+      --text:#F4F5F6;
+      --muted:rgba(244,245,246,.72);
+      --muted2:rgba(244,245,246,.55);
+      --stroke:rgba(244,245,246,.14);
+      --card:rgba(255,255,255,.04);
+
+      /* pastel mint / teal accent like your reference */
+      --accent:#A7DAD2;
+      --accent2:#7EC7BB;
+
       --radius:18px;
-      --radiusLg:22px;
-      --max:1040px;
+      --radius2:22px;
+      --max:1100px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 60% -10%, rgba(167,218,210,.12), transparent 60%),
+                  radial-gradient(900px 500px at 10% 0%, rgba(167,218,210,.08), transparent 60%),
+                  linear-gradient(180deg, var(--bg) 0%, var(--bg2) 60%, var(--bg) 100%);
       color:var(--text);
-      background:
-        radial-gradient(900px 500px at 20% 0%, rgba(47,107,255,.18), transparent 60%),
-        radial-gradient(900px 500px at 80% 10%, rgba(56,211,159,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 60%, var(--bg0) 100%);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:56px 20px 44px}
-    .topbar{
+    .wrap{max-width:var(--max); margin:0 auto; padding:44px 20px 50px}
+
+    /* Top nav */
+    .top{
       display:flex; align-items:center; justify-content:space-between; gap:12px;
-      margin-bottom:26px;
+      margin-bottom:22px;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      font-family:Sora, Inter, system-ui, sans-serif;
-      letter-spacing:-.02em;
+      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
       font-weight:700;
-      font-size:18px;
+      letter-spacing:-.02em;
+      font-size:16px;
     }
-    .dot{
+    .mark{
       width:10px; height:10px; border-radius:999px;
-      background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-      box-shadow:0 0 0 6px rgba(47,107,255,.15);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 7px rgba(167,218,210,.12);
     }
-    .kicker{
+    .navRight{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      color:var(--muted2);
+      font-size:12.5px;
+    }
+    .chip{
       display:inline-flex; align-items:center; gap:8px;
       padding:7px 12px;
-      border:1px solid var(--border);
+      border:1px solid var(--stroke);
       border-radius:999px;
+      background: rgba(255,255,255,.03);
       color:var(--muted);
-      font-size:12px;
-      background:rgba(255,255,255,.04);
+      font-size:12.5px;
+      white-space:nowrap;
     }
-    .kicker b{color:rgba(255,255,255,.88); font-weight:600}
 
+    /* Hero (reference style: big ghost word, clean lines) */
     .hero{
-      padding:22px 0 8px;
+      position:relative;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:28px;
+      padding:34px 28px 26px;
+      overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+    }
+
+    /* Huge background word */
+    .ghost{
+      position:absolute;
+      left:-4%;
+      top:44%;
+      transform:translateY(-50%);
+      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+      font-weight:700;
+      letter-spacing:-.06em;
+      font-size: clamp(88px, 16vw, 220px);
+      line-height: .9;
+      color: rgba(167,218,210,.78);  /* pastel big word */
+      opacity:.92;
+      pointer-events:none;
+      white-space:nowrap;
+      filter: blur(.0px);
+    }
+
+    /* A subtle “spotlight” behind the content */
+    .spot{
+      position:absolute;
+      inset:auto -20% -55% -20%;
+      height:520px;
+      background: radial-gradient(closest-side, rgba(167,218,210,.18), transparent 70%);
+      pointer-events:none;
+    }
+
+    .heroGrid{
+      position:relative;
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:22px;
-      align-items:start;
+      grid-template-columns: 1.2fr .8fr;
+      gap:26px;
+      align-items:end;
     }
-    h1{
-      font-family:Sora, Inter, system-ui, sans-serif;
+
+    .eyebrow{
+      color: rgba(167,218,210,.92);
+      font-size:13px;
+      letter-spacing:.02em;
       margin:0 0 10px;
-      font-size:44px;
-      letter-spacing:-.03em;
-      line-height:1.05;
     }
-    .sub{
+
+    h1{
+      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+      margin:0 0 14px;
+      font-size: clamp(34px, 4.3vw, 54px);
+      line-height:1.02;
+      letter-spacing:-.04em;
+    }
+
+    .lead{
+      margin:0;
       color:var(--muted);
       font-size:18px;
       line-height:1.55;
       max-width:62ch;
-      margin-bottom:18px;
     }
 
-    .pills{display:flex; gap:10px; flex-wrap:wrap}
+    .pills{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:18px;
+    }
     .pill{
       padding:8px 12px;
       border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.03);
+      color: rgba(244,245,246,.9);
       font-size:13px;
-      color:rgba(255,255,255,.9);
-      background:rgba(255,255,255,.08);
-      border:1px solid var(--border);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
     }
 
-    .ctaCard{
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      border-radius:var(--radiusLg);
-      padding:18px;
-      box-shadow:var(--shadow);
+    .heroCard{
+      border:1px solid var(--stroke);
+      border-radius: var(--radius2);
+      background: rgba(0,0,0,.18);
+      padding:16px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-    .ctaTitle{
-      font-family:Sora, Inter, system-ui, sans-serif;
+    .heroCardTitle{
+      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
       font-weight:650;
-      margin:0 0 6px;
+      letter-spacing:-.02em;
+      margin:0 0 8px;
       font-size:14px;
-      color:rgba(255,255,255,.92);
-      letter-spacing:-.01em;
+      color:rgba(244,245,246,.92);
     }
-    .ctaText{
-      margin:0 0 12px;
-      font-size:13px;
+    .heroCardText{
+      margin:0 0 14px;
       color:var(--muted);
-      line-height:1.5;
+      font-size:13.5px;
+      line-height:1.55;
     }
-    .ctaRow{display:flex; gap:10px; flex-wrap:wrap}
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap}
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 12px;
-      border-radius:12px;
+      padding:11px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(167,218,210,.45);
+      background: rgba(167,218,210,.14);
+      color: rgba(244,245,246,.95);
       font-weight:700;
       font-size:14px;
-      border:1px solid rgba(47,107,255,.45);
-      background:linear-gradient(135deg, rgba(47,107,255,.95), rgba(47,107,255,.72));
-      color:#fff;
       cursor:pointer;
+      transition: transform .08s ease, background .12s ease;
     }
+    .btn:hover{transform: translateY(-1px); background: rgba(167,218,210,.18)}
     .btn.secondary{
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      color:rgba(255,255,255,.9);
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.03);
+      color: rgba(244,245,246,.92);
       font-weight:650;
     }
+    .btn.secondary:hover{background: rgba(255,255,255,.05)}
 
+    /* Section title */
     .sectionTitle{
-      margin:30px 0 12px;
-      font-family:Sora, Inter, system-ui, sans-serif;
+      margin:26px 0 12px;
+      display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
       font-size:16px;
       letter-spacing:-.01em;
-      color:rgba(255,255,255,.92);
+      color:rgba(244,245,246,.92);
+    }
+    .sectionTitle span{
+      color:var(--muted2);
+      font-size:12.5px;
     }
 
-    /* Pricing: studio cards */
-    .pricingGrid{
+    /* Pricing cards: editorial clean */
+    .pricing{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap:14px;
-      margin-top:10px;
     }
     .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radiusLg);
+      border:1px solid var(--stroke);
+      border-radius: var(--radius2);
+      background: var(--card);
       padding:18px;
-      box-shadow: 0 10px 36px rgba(0,0,0,.25);
       position:relative;
       overflow:hidden;
     }
-    .card:before{
+    .card::after{
       content:"";
-      position:absolute; inset:-40px -40px auto auto;
-      width:160px; height:160px;
-      background:radial-gradient(circle at 30% 30%, rgba(47,107,255,.35), transparent 60%);
-      transform:rotate(15deg);
+      position:absolute;
+      inset:-70px -70px auto auto;
+      width:180px; height:180px;
+      background: radial-gradient(circle at 30% 30%, rgba(167,218,210,.18), transparent 62%);
       pointer-events:none;
     }
-    .cardHeader{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    .cardHead{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
       margin-bottom:6px;
     }
     .plan{
-      font-family:Sora, Inter, system-ui, sans-serif;
-      font-size:15px;
-      font-weight:650;
-      letter-spacing:-.01em;
       margin:0;
+      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+      font-weight:650;
+      font-size:15px;
+      letter-spacing:-.01em;
     }
-    .tag{
+    .badge{
       display:inline-flex; align-items:center;
-      padding:4px 8px;
+      padding:4px 9px;
       border-radius:999px;
+      border:1px solid rgba(167,218,210,.35);
+      background: rgba(167,218,210,.12);
+      color: rgba(244,245,246,.92);
       font-size:12px;
-      color:rgba(255,255,255,.88);
-      background:rgba(255,255,255,.08);
-      border:1px solid var(--border);
       white-space:nowrap;
     }
     .price{
-      font-family:Sora, Inter, system-ui, sans-serif;
-      font-size:28px;
+      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
       font-weight:800;
-      margin:6px 0 8px;
-      letter-spacing:-.02em;
+      letter-spacing:-.03em;
+      margin:6px 0 10px;
+      font-size:30px;
     }
     .note{
+      margin:0 0 10px;
       color:var(--muted2);
       font-size:12.5px;
-      line-height:1.45;
-      margin:0 0 10px;
+      line-height:1.5;
     }
     ul{
       margin:0;
@@ -220,136 +284,153 @@
     }
     li{margin:4px 0}
 
-    .popular{
-      border-color: rgba(47,107,255,.55);
-      background: linear-gradient(180deg, rgba(47,107,255,.12), rgba(255,255,255,.06));
+    /* Make Stage 1 subtly "featured" without looking salesy */
+    .featured{
+      border-color: rgba(167,218,210,.55);
+      background: linear-gradient(180deg, rgba(167,218,210,.10), rgba(255,255,255,.03));
     }
-    .popular .tag{
-      background:rgba(47,107,255,.22);
-      border-color:rgba(47,107,255,.45);
-      color:#cfe0ff;
+    .featured .badge{
+      border-color: rgba(167,218,210,.55);
+      background: rgba(167,218,210,.18);
     }
 
-    /* Lower panels */
-    .two{
+    /* Bottom: How it works + Contact */
+    .bottom{
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1.05fr .95fr;
       gap:14px;
-      margin-top:18px;
-      align-items:start;
+      margin-top:14px;
     }
     .panel{
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      border-radius:var(--radiusLg);
+      border:1px solid var(--stroke);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.03);
       padding:18px;
     }
-    .panel h2{
-      font-family:Sora, Inter, system-ui, sans-serif;
+    .panel h3{
       margin:0 0 10px;
+      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
       font-size:16px;
       letter-spacing:-.01em;
     }
     .small{
+      margin:0;
       color:var(--muted);
       font-size:14px;
-      line-height:1.6;
-      margin:0;
+      line-height:1.65;
     }
     .mini{
       margin-top:10px;
       color:var(--muted2);
       font-size:12.5px;
-      line-height:1.5;
+      line-height:1.55;
     }
 
-    /* Contact form (AJAX submit, no Formspree thank-you page) */
+    /* Form */
     form{display:grid; gap:10px; margin-top:12px}
     input, textarea{
       width:100%;
       padding:12px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(0,0,0,.18);
-      color:var(--text);
+      border-radius:14px;
+      border:1px solid rgba(244,245,246,.14);
+      background: rgba(0,0,0,.20);
+      color: var(--text);
       font-size:14px;
       outline:none;
     }
-    input::placeholder, textarea::placeholder{color:rgba(255,255,255,.45)}
+    input::placeholder, textarea::placeholder{color:rgba(244,245,246,.45)}
     textarea{min-height:112px; resize:vertical}
-    .formRow{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-    @media (max-width:700px){ .formRow{grid-template-columns:1fr} }
-
-    .formActions{
+    .row{
+      display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    }
+    .actions{
       display:flex; gap:10px; align-items:center; flex-wrap:wrap;
       margin-top:2px;
     }
     .status{
       font-size:13.5px;
-      color:rgba(255,255,255,.80);
+      color: var(--muted);
     }
-    .status.ok{color:rgba(56,211,159,.92)}
-    .status.err{color:rgba(255,176,32,.95)}
+    .status.ok{color: rgba(167,218,210,.95)}
+    .status.err{color: rgba(255,176,32,.95)}
 
+    /* Footer without email */
     .footer{
-      margin-top:22px;
+      margin-top:18px;
       padding-top:16px;
-      border-top:1px solid var(--border);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      color:var(--muted2);
+      border-top:1px solid rgba(244,245,246,.10);
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      color: var(--muted2);
       font-size:12.5px;
     }
 
-    @media (max-width:980px){
-      h1{font-size:38px}
-      .hero{grid-template-columns:1fr}
-      .pricingGrid{grid-template-columns:1fr}
-      .two{grid-template-columns:1fr}
+    /* Responsive */
+    @media (max-width: 980px){
+      .pricing{grid-template-columns:1fr}
+      .heroGrid{grid-template-columns:1fr}
+      .bottom{grid-template-columns:1fr}
+      .ghost{left:-8%; top:48%}
+    }
+    @media (max-width: 640px){
+      .hero{padding:28px 18px 20px}
+      .row{grid-template-columns:1fr}
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="topbar">
-      <div class="brand"><span class="dot"></span>EIC Readiness Studio</div>
-      <div class="kicker"><b>EIC Accelerator</b> • Stage 1 → Stage 2</div>
-    </div>
 
-    <div class="hero">
-      <div>
-        <h1>Build an EIC-ready case — fast.</h1>
-        <div class="sub">
-          We build reviewer-ready EIC submissions (story + evidence + execution) with clear scope, fast cycles, and studio-grade clarity.
-        </div>
-
-        <div class="pills">
-          <div class="pill">7-day GO/NO-GO</div>
-          <div class="pill">Evidence-first</div>
-          <div class="pill">Outcome-based tiers</div>
-        </div>
-      </div>
-
-      <div class="ctaCard">
-        <div class="ctaTitle">Limited slots per cut-off</div>
-        <p class="ctaText">Start with a fast diagnostic. If it’s a strong GO, we ship Stage 1 assets and activate Stage 2 only by invitation.</p>
-        <div class="ctaRow">
-          <a class="btn" href="#contact">Send a message</a>
-          <a class="btn secondary" href="#pricing">View pricing</a>
-        </div>
+    <div class="top">
+      <div class="brand"><span class="mark"></span>EIC Readiness Studio</div>
+      <div class="navRight">
+        <span class="chip">EIC Accelerator • Stage 1 → Stage 2</span>
       </div>
     </div>
 
-    <div class="sectionTitle" id="pricing">Outcome Ladder (Pricing)</div>
+    <section class="hero">
+      <div class="spot"></div>
+      <div class="ghost">Readiness</div>
 
-    <div class="pricingGrid">
+      <div class="heroGrid">
+        <div>
+          <p class="eyebrow">Tech proposal studio</p>
+          <h1>Build an EIC-ready case<br/>fast and clean.</h1>
+          <p class="lead">
+            We craft reviewer-ready EIC submissions (story + evidence + execution) with structured scope, fast cycles,
+            and studio-grade clarity.
+          </p>
+
+          <div class="pills">
+            <div class="pill">7-day GO/NO-GO</div>
+            <div class="pill">Evidence-first</div>
+            <div class="pill">Outcome tiers</div>
+          </div>
+        </div>
+
+        <aside class="heroCard">
+          <p class="heroCardTitle">Limited slots per cut-off</p>
+          <p class="heroCardText">
+            Start with a fast diagnostic. If it’s a strong GO, we ship Stage 1 assets and activate Stage 2 only by invitation.
+          </p>
+          <div class="btnRow">
+            <a class="btn" href="#contact">Contact</a>
+            <a class="btn secondary" href="#pricing">Pricing</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="sectionTitle" id="pricing">
+      <h2>Outcome Ladder (Pricing)</h2>
+      <span>Stage 2 starts only if invited after Stage 1</span>
+    </div>
+
+    <section class="pricing">
       <div class="card">
-        <div class="cardHeader">
+        <div class="cardHead">
           <h3 class="plan">EIC READY</h3>
-          <span class="tag">7 days</span>
+          <span class="badge">7 days</span>
         </div>
         <div class="price">€1,200</div>
         <p class="note">Best for: fast GO/NO-GO before committing time and budget.</p>
@@ -360,10 +441,10 @@
         </ul>
       </div>
 
-      <div class="card popular">
-        <div class="cardHeader">
+      <div class="card featured">
+        <div class="cardHead">
           <h3 class="plan">EIC SUBMIT-READY</h3>
-          <span class="tag">Stage 1</span>
+          <span class="badge">Stage 1</span>
         </div>
         <div class="price">€4,900</div>
         <p class="note">Best for: Stage 1 assets that are reviewer-ready and easy to understand.</p>
@@ -375,9 +456,9 @@
       </div>
 
       <div class="card">
-        <div class="cardHeader">
+        <div class="cardHead">
           <h3 class="plan">EIC INVESTMENT-READY</h3>
-          <span class="tag">Stage 2</span>
+          <span class="badge">Stage 2</span>
         </div>
         <div class="price">€6,900</div>
         <p class="note">By invitation after Stage 1. Optional success fee (case-by-case, agreed upfront).</p>
@@ -387,56 +468,56 @@
           <li>Up to 2 revision rounds + final QA</li>
         </ul>
       </div>
-    </div>
+    </section>
 
-    <div class="two">
+    <section class="bottom">
       <div class="panel">
-        <h2>How it works</h2>
+        <h3>How it works</h3>
         <p class="small">
-          We run a fast diagnostic, ship Stage 1 assets, and activate Stage 2 only if you are invited to submit the full proposal.
-          Clear scope, fast cycles, and reviewer-aligned outputs.
+          Diagnostic → Stage 1 assets → Stage 2 full proposal (by invitation).
+          Clear scope, fast cycles, reviewer-aligned outputs.
         </p>
         <div class="mini">
-          Studio workflow: structured intake → drafting → QA → submission-ready assets.
+          Studio workflow: structured intake → drafting → QA → submission-ready package.
         </div>
       </div>
 
       <div class="panel" id="contact">
-        <h2>Contact</h2>
+        <h3>Contact</h3>
         <p class="small">Send a message — we’ll reply with next steps.</p>
 
-        <!-- IMPORTANT: keep only this endpoint (do not wrap it in anything else) -->
+        <!-- Formspree endpoint -->
         <form id="contactForm" action="https://formspree.io/f/xvzbdzwj" method="POST">
-          <div class="formRow">
+          <div class="row">
             <input type="text" name="name" placeholder="Your name" required />
             <input type="email" name="email" placeholder="Email" required />
           </div>
           <input type="text" name="company" placeholder="Company (optional)" />
           <textarea name="message" placeholder="Message" required></textarea>
 
-          <div class="formActions">
+          <div class="actions">
             <button class="btn" type="submit">Send message</button>
             <span id="formStatus" class="status"></span>
           </div>
         </form>
 
         <div class="mini">
-          No email address displayed on the site. Messages are delivered via the contact form.
+          For privacy, we don’t display an email address publicly. Contact is handled via the form.
         </div>
       </div>
-    </div>
+    </section>
 
     <div class="footer">
       <div>© <span id="y"></span> EIC Readiness Studio</div>
-      <div>Built on GitHub Pages • Contact via form</div>
+      <div>Built on GitHub Pages</div>
     </div>
+
   </div>
 
   <script>
-    // Footer year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // AJAX submit to avoid Formspree "thank you" page / locale issues
+    // AJAX submit (keeps user on your site, English message, no Formspree thank-you page)
     (function () {
       const form = document.getElementById("contactForm");
       const statusEl = document.getElementById("formStatus");
@@ -450,13 +531,13 @@
 
         try {
           const formData = new FormData(form);
-          const response = await fetch(form.action, {
+          const res = await fetch(form.action, {
             method: "POST",
             body: formData,
             headers: { "Accept": "application/json" }
           });
 
-          if (response.ok) {
+          if (res.ok) {
             statusEl.className = "status ok";
             statusEl.textContent = "Thank you! Your message has been sent.";
             form.reset();
