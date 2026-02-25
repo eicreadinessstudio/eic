@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EIC Readiness Studio</title>
 
-  <!-- Luxury editorial pairing: Serif headlines + clean sans body -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -243,7 +242,7 @@
       margin:6px 0 10px;
       color:var(--muted2);
       font-size:12px;
-      line-height:1.55;
+      line-height:1.45;
     }
     .plan ul{
       margin:0;
@@ -356,7 +355,7 @@
     <div class="nav">
       <div class="navLeft">
         <a href="#pricing">Pricing</a>
-        <a href="/eic/full-scope.html">Full scope</a>
+        <a href="full-scope.html">Full scope</a>
       </div>
 
       <div class="logo">EIC Readiness Studio</div>
@@ -383,9 +382,8 @@
             <span class="pill">Readiness tiers</span>
           </div>
 
-          <!-- Your hero image (kept editorial) -->
           <div class="heroMedia">
-            <img src="./assets/hero.png" alt="EIC Readiness Studio hero">
+            <img src="assets/hero.png" alt="EIC Readiness Studio hero">
           </div>
 
           <div class="grid2">
@@ -427,11 +425,11 @@
         </section>
       </main>
 
-      <!-- RIGHT (sticky rail) -->
+      <!-- RIGHT -->
       <aside class="rail" id="pricing">
         <div class="railTop">
           <h2>Readiness Tiers</h2>
-          <span>Fixed scope.</span>
+          <span>Fixed scope</span>
         </div>
 
         <div class="plan">
@@ -439,9 +437,7 @@
             <div class="planName">EIC Ready</div>
             <div class="price">€1,200</div>
           </div>
-          <div class="credit">
-            EIC Ready fee is credited toward EIC Submit-Ready if you’re a GO and you proceed within 30 days.
-          </div>
+          <div class="credit">Credited toward Stage 1 for GO projects (30 days).</div>
           <div class="tag">7 days</div>
           <ul>
             <li>GO/NO-GO + EIC Fit Score</li>
@@ -479,7 +475,7 @@
         </div>
 
         <div class="railActions">
-          <a class="btn" href="/eic/full-scope.html">Full scope</a>
+          <a class="btn" href="full-scope.html">Full scope</a>
           <a class="btn primary" href="#contact">Contact</a>
         </div>
 
@@ -487,7 +483,6 @@
           <h3>Contact</h3>
           <p>Send a quick note — we’ll reply with next steps.</p>
 
-          <!-- Formspree endpoint -->
           <form id="contactForm" action="https://formspree.io/f/xvzbdzwj" method="POST">
             <div class="row">
               <input type="text" name="name" placeholder="Your name" required />
@@ -512,7 +507,6 @@
   </div>
 
   <script>
-    // AJAX submit: stay on page, English messages (no Formspree thank-you page)
     (function(){
       const form = document.getElementById("contactForm");
       const statusEl = document.getElementById("formStatus");
