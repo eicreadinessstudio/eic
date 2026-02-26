@@ -53,13 +53,13 @@
     .navLeft{justify-content:flex-start}
     .navRight{justify-content:flex-end}
 
-    /* Make the top logo match one-pager more */
+    /* Top logo matches one-pager */
     .logo{
       font-family:"Cormorant Garamond", serif;
       font-weight:600;
-      letter-spacing:.30em;                /* stronger tracking */
+      letter-spacing:.30em;
       text-transform:uppercase;
-      font-size:18px;                      /* slightly smaller */
+      font-size:18px;
       color:var(--ink);
       text-align:center;
       line-height:1;
@@ -71,7 +71,7 @@
       display:grid;
       grid-template-columns: 1.25fr .75fr;
       gap:28px;
-      margin-top:34px;                     /* more separation from nav */
+      margin-top:34px;
       align-items:start;
     }
 
@@ -96,11 +96,11 @@
       letter-spacing:-.01em;
     }
     .sub{
-      margin:0 0 18px;                     /* more air before pills */
+      margin:0 0 18px;
       color:var(--muted);
       font-size:15.5px;
       line-height:1.7;
-      max-width:68ch;                      /* tighter = more editorial */
+      max-width:68ch;
     }
     .sub strong{color:rgba(11,15,20,.88); font-weight:600}
 
@@ -120,19 +120,50 @@
       white-space:nowrap;
     }
 
-    /* subtle hairline below pills (editorial detail) */
+    /* subtle hairline below pills */
     .hairline{height:1px;background:var(--line2);margin:18px 0 0;}
 
+    /* Hero image: premium editorial treatment */
     .heroMedia{
-      margin-top:18px;                     /* more breathing room */
-      border:1px solid var(--line2);
+      margin-top:18px;
+      position:relative;
+      overflow:hidden;
       background:var(--surface);
+      border:1px solid rgba(11,15,20,.10);               /* hairline frame */
+      box-shadow: 0 0 0 1px rgba(255,255,255,.6) inset;  /* inner paper line */
     }
     .heroMedia img{
       width:100%;
       height:auto;
       display:block;
-      filter: grayscale(100%) contrast(1.05) brightness(1.02);
+      filter: grayscale(100%) contrast(1.12) brightness(.98);
+      transform: scale(1.01); /* tiny scale for crisp edge */
+    }
+    /* gradient overlay for premium readability (editorial) */
+    .heroMedia::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(
+        90deg,
+        rgba(11,15,20,.30) 0%,
+        rgba(11,15,20,.18) 45%,
+        rgba(11,15,20,0) 100%
+      );
+      pointer-events:none;
+    }
+    /* subtle vignette (very light) */
+    .heroMedia::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgba(0,0,0,0) 55%,
+        rgba(0,0,0,.12) 100%
+      );
+      opacity:.18;
+      pointer-events:none;
     }
 
     /* Section blocks */
@@ -165,7 +196,7 @@
     }
     .block li{margin:6px 0}
 
-    /* Optional gentle wash background for one section set */
+    /* Gentle wash to break up white */
     .sectionWash{
       background:var(--surface);
       border:1px solid var(--line2);
@@ -212,7 +243,7 @@
       top:18px;
       border:1px solid var(--line);
       padding:18px;
-      background:var(--surface);           /* white paper against off-white bg */
+      background:var(--surface);
     }
     .railTop{
       display:flex; justify-content:space-between; align-items:baseline; gap:10px;
@@ -357,7 +388,7 @@
     .status.ok{color:#0f6b4f}
     .status.err{color:#8a2a2a}
 
-    /* Footer - remove "Built on GitHub Pages" and make it minimal */
+    /* Footer minimal */
     .footer{
       margin-top:44px;
       padding-top:18px;
@@ -426,7 +457,6 @@
             <img src="assets/hero.png" alt="EIC Readiness Studio hero">
           </div>
 
-          <!-- Optional: give this first set a subtle wash to break the white -->
           <div class="sectionWash">
             <div class="grid2" style="margin-top:0; padding-top:0; border-top:none;">
               <div class="block">
