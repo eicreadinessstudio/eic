@@ -11,7 +11,7 @@
 
   <style>
     :root {
-      /* Light Mode (Base) */
+      /* Light Mode Variables */
       --bg: #f4f6f8;
       --ink: #0b0f14;
       --muted: rgba(11, 15, 20, .72);
@@ -23,7 +23,7 @@
       --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Dark Mode Overrides */
+    /* Dark Mode Variables Override */
     [data-theme="dark"] {
       --bg: #0b0f14;
       --ink: #f4f6f8;
@@ -85,20 +85,27 @@
     .navLeft { justify-content: flex-start; }
     .navRight { justify-content: flex-end; }
 
-    /* Theme Toggle */
+    /* ✅ Premium Theme Toggle (Icons) */
     .theme-toggle {
       background: none;
       border: 1px solid var(--line);
       color: var(--muted);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
       cursor: pointer;
+      border-radius: 50%;
       transition: var(--transition);
+      padding: 0;
+      line-height: 0;
     }
-    .theme-toggle:hover { border-color: var(--ink); color: var(--ink); }
+    .theme-toggle:hover {
+      border-color: var(--ink);
+      transform: rotate(12deg);
+    }
 
     /* ✅ Punkt 7: Monogram added to Logo */
     .logo {
@@ -327,7 +334,7 @@
       </div>
       <div class="logo">EIC Readiness Studio</div>
       <div class="navRight">
-        <button id="theme-btn" class="theme-toggle">Dark Mode</button>
+        <button id="theme-btn" class="theme-toggle" aria-label="Toggle dark mode">☀️</button>
         <a href="#contact">Contact</a>
       </div>
     </nav>
@@ -475,24 +482,28 @@
   </div>
 
   <script>
-    /* ✅ Dark Mode Logic */
+    /* ✅ Dark Mode Logic with Icons */
     const themeBtn = document.getElementById("theme-btn");
     const currentTheme = localStorage.getItem("theme");
 
+    function updateIcon(theme) {
+      themeBtn.textContent = theme === "dark" ? "🌙" : "☀️";
+    }
+
     if (currentTheme === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
-      themeBtn.textContent = "Light Mode";
+      updateIcon("dark");
     }
 
     themeBtn.addEventListener("click", () => {
       let theme = document.documentElement.getAttribute("data-theme");
       if (theme === "dark") {
         document.documentElement.removeAttribute("data-theme");
-        themeBtn.textContent = "Dark Mode";
+        updateIcon("light");
         localStorage.setItem("theme", "light");
       } else {
         document.documentElement.setAttribute("data-theme", "dark");
-        themeBtn.textContent = "Light Mode";
+        updateIcon("dark");
         localStorage.setItem("theme", "dark");
       }
     });
