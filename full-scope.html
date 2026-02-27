@@ -11,6 +11,7 @@
 
   <style>
     :root {
+      /* Light Mode Variables */
       --bg: #f4f6f8;
       --ink: #0b0f14;
       --muted: rgba(11, 15, 20, .72);
@@ -20,6 +21,17 @@
       --surface: #ffffff;
       --max: 980px;
       --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Dark Mode Variables Override */
+    [data-theme="dark"] {
+      --bg: #0b0f14;
+      --ink: #f4f6f8;
+      --muted: rgba(244, 246, 248, .72);
+      --muted2: rgba(244, 246, 248, .55);
+      --line: rgba(244, 246, 248, .15);
+      --line2: rgba(244, 246, 248, .10);
+      --surface: #161b22;
     }
 
     /* ✅ Punkt 1: Scroll Reveal Animation Styles */
@@ -44,6 +56,7 @@
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       letter-spacing: -.015em;
       line-height: 1.6;
+      transition: background 0.5s ease, color 0.5s ease;
     }
 
     a { color: inherit; text-decoration: none; transition: var(--transition); }
@@ -71,6 +84,28 @@
 
     .navLeft { justify-content: flex-start; }
     .navRight { justify-content: flex-end; }
+
+    /* ✅ Premium Theme Toggle (Icons) */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: var(--transition);
+      padding: 0;
+      line-height: 0;
+    }
+    .theme-toggle:hover {
+      border-color: var(--ink);
+      transform: rotate(12deg);
+    }
 
     /* ✅ Punkt 7: Monogram added to Logo */
     .logo {
@@ -146,10 +181,11 @@
     .section p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
 
     .sectionWash {
-      background: #fff;
+      background: var(--surface);
       border: 1px solid var(--line2);
       padding: 24px 32px;
       margin-top: 18px;
+      transition: background 0.5s ease;
     }
 
     ul { padding-left: 20px; margin: 12px 0; color: var(--muted); font-size: 15px; }
@@ -166,6 +202,10 @@
       padding: 32px;
       box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
       border-radius: 4px;
+      transition: background 0.5s ease;
+    }
+    [data-theme="dark"] .pkg {
+      background: rgba(22, 27, 34, 0.7);
     }
 
     .pkgHeader {
@@ -218,6 +258,7 @@
       letter-spacing: .12em;
       background: var(--surface);
       font-weight: 600;
+      color: var(--ink);
     }
 
     .back:hover { background: var(--bg); transform: translateY(-1px); }
@@ -249,6 +290,7 @@
       <a class="logo" href="./">EIC Readiness Studio</a>
 
       <div class="navRight">
+        <button id="theme-btn" class="theme-toggle" aria-label="Toggle dark mode">☀️</button>
         <a href="./#contact">Contact</a>
       </div>
     </nav>
@@ -386,6 +428,32 @@
   </div>
 
   <script>
+    /* ✅ Dark Mode Logic with Icons */
+    const themeBtn = document.getElementById("theme-btn");
+    const currentTheme = localStorage.getItem("theme");
+
+    function updateIcon(theme) {
+      themeBtn.textContent = theme === "dark" ? "🌙" : "☀️";
+    }
+
+    if (currentTheme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      updateIcon("dark");
+    }
+
+    themeBtn.addEventListener("click", () => {
+      let theme = document.documentElement.getAttribute("data-theme");
+      if (theme === "dark") {
+        document.documentElement.removeAttribute("data-theme");
+        updateIcon("light");
+        localStorage.setItem("theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        updateIcon("dark");
+        localStorage.setItem("theme", "dark");
+      }
+    });
+
     /* ✅ Punkt 1: Scroll Reveal Observer Script */
     const observerOptions = {
       threshold: 0.1
