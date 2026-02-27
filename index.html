@@ -11,6 +11,7 @@
 
   <style>
     :root {
+      /* Light Mode (Base) */
       --bg: #f4f6f8;
       --ink: #0b0f14;
       --muted: rgba(11, 15, 20, .72);
@@ -20,6 +21,17 @@
       --surface: #ffffff;
       --max: 1160px;
       --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Dark Mode Overrides */
+    [data-theme="dark"] {
+      --bg: #0b0f14;
+      --ink: #f4f6f8;
+      --muted: rgba(244, 246, 248, .72);
+      --muted2: rgba(244, 246, 248, .55);
+      --line: rgba(244, 246, 248, .15);
+      --line2: rgba(244, 246, 248, .10);
+      --surface: #161b22;
     }
 
     /* ✅ Punkt 1: Scroll Reveal Animation Styles */
@@ -44,6 +56,7 @@
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       letter-spacing: -.015em;
       line-height: 1.6;
+      transition: background 0.5s ease, color 0.5s ease;
     }
 
     a { color: inherit; text-decoration: none; transition: var(--transition); }
@@ -71,6 +84,21 @@
 
     .navLeft { justify-content: flex-start; }
     .navRight { justify-content: flex-end; }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .theme-toggle:hover { border-color: var(--ink); color: var(--ink); }
 
     /* ✅ Punkt 7: Monogram added to Logo */
     .logo {
@@ -181,10 +209,11 @@
 
     /* Sections */
     .sectionWash {
-      background: #fff;
+      background: var(--surface);
       border: 1px solid var(--line2);
       padding: 24px 32px;
       margin-top: 42px;
+      transition: background 0.5s ease;
     }
 
     .grid2 {
@@ -210,7 +239,7 @@
       display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;
     }
 
-    .step { border-top: 1px solid var(--ink); padding-top: 20px; }
+    .step { border-top: 1px solid var(--ink); padding-top: 20px; transition: border-color 0.5s ease; }
     .step .num { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted2); margin-bottom: 12px; }
     .step h3 { font-family: "Cormorant Garamond", serif; font-size: 22px; margin: 0 0 12px; }
     .step p { font-size: 14px; color: var(--muted); line-height: 1.7; }
@@ -224,6 +253,10 @@
       border: 1px solid var(--line);
       padding: 32px;
       box-shadow: 0 30px 60px -20px rgba(0,0,0,0.08);
+      transition: background 0.5s ease;
+    }
+    [data-theme="dark"] .rail {
+      background: rgba(22, 27, 34, 0.75);
     }
 
     .railTop { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 24px; }
@@ -246,10 +279,11 @@
       letter-spacing: .12em; background: var(--surface);
       cursor: pointer; transition: var(--transition);
       font-weight: 600;
+      color: var(--ink);
     }
 
     .btn:hover { background: var(--bg); transform: translateY(-1px); }
-    .btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
     .btn.primary:hover { opacity: 0.9; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
     /* Contact */
@@ -263,8 +297,9 @@
     input, textarea {
       width: 100%; padding: 14px; border: 1px solid var(--line); border-radius: 4px;
       background: var(--bg); font-family: inherit; font-size: 14px; transition: var(--transition);
+      color: var(--ink);
     }
-    input:focus, textarea:focus { outline: none; border-color: var(--ink); background: #fff; }
+    input:focus, textarea:focus { outline: none; border-color: var(--ink); background: var(--surface); }
 
     /* Footer */
     .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); color: var(--muted2); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
@@ -292,6 +327,7 @@
       </div>
       <div class="logo">EIC Readiness Studio</div>
       <div class="navRight">
+        <button id="theme-btn" class="theme-toggle">Dark Mode</button>
         <a href="#contact">Contact</a>
       </div>
     </nav>
@@ -439,6 +475,28 @@
   </div>
 
   <script>
+    /* ✅ Dark Mode Logic */
+    const themeBtn = document.getElementById("theme-btn");
+    const currentTheme = localStorage.getItem("theme");
+
+    if (currentTheme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      themeBtn.textContent = "Light Mode";
+    }
+
+    themeBtn.addEventListener("click", () => {
+      let theme = document.documentElement.getAttribute("data-theme");
+      if (theme === "dark") {
+        document.documentElement.removeAttribute("data-theme");
+        themeBtn.textContent = "Dark Mode";
+        localStorage.setItem("theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        themeBtn.textContent = "Light Mode";
+        localStorage.setItem("theme", "dark");
+      }
+    });
+
     /* ✅ Punkt 1: Scroll Reveal Observer Script */
     const observerOptions = {
       threshold: 0.1
