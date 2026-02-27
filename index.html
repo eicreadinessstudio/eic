@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" style="scroll-behavior: smooth;">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,8 +23,9 @@
     }
 
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     html, body { height: 100%; }
-    
+
     body {
       margin: 0;
       background: var(--bg);
@@ -117,7 +118,7 @@
     .sub strong { color: var(--ink); font-weight: 600; }
 
     .pills { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
-    
+
     .pill {
       border: 1px solid var(--line);
       padding: 8px 16px;
@@ -144,14 +145,14 @@
       filter: grayscale(100%) contrast(1.05) brightness(0.95);
       transition: var(--transition);
     }
-    
+
     .heroMedia:hover img { transform: scale(1.02); filter: grayscale(0%) contrast(1.05); }
 
-    /* Poprawione sekcje: Zredukowany Padding */
+    /* Sections */
     .sectionWash {
       background: #fff;
       border: 1px solid var(--line2);
-      padding: 24px 32px; /* Zredukowane z 40px */
+      padding: 24px 32px;
       margin-top: 42px;
     }
 
@@ -164,7 +165,7 @@
       margin: 0 0 16px;
       font-family: "Cormorant Garamond", serif;
       font-weight: 600;
-      font-size: 26px; /* Delikatnie mniejszy dla lepszych proporcji */
+      font-size: 26px;
       line-height: 1.2;
     }
 
@@ -197,6 +198,7 @@
     .railTop span { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted2); }
 
     .plan { padding: 20px 0; border-bottom: 1px solid var(--line2); }
+    .plan:last-of-type { border-bottom: none; }
     .planHeader { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
     .planName { font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
     .price { font-weight: 600; font-size: 16px; text-align: right; }
@@ -205,228 +207,19 @@
     .tag { display: inline-block; margin: 12px 0; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted2); border: 1px solid var(--line); padding: 2px 8px; border-radius: 4px; }
     .plan ul { padding-left: 18px; margin: 12px 0; font-size: 13.5px; color: var(--muted); }
 
+    .railActions{
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     .btn {
       display: inline-flex; justify-content: center; align-items: center;
       padding: 12px 24px; border: 1px solid var(--line);
       border-radius: 4px; font-size: 11px; text-transform: uppercase;
       letter-spacing: .12em; background: var(--surface);
       cursor: pointer; transition: var(--transition);
-      font-weight: 600;
-    }
-
-    .btn:hover { background: var(--bg); transform: translateY(-1px); }
-    .btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
-    .btn.primary:hover { opacity: 0.9; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-
-    /* Poprawka przesunięcia dla formularza */
-    .contactTitle { 
-      margin-top: 32px; 
-      padding-top: 32px; 
-      border-top: 1px solid var(--line);
-      scroll-margin-top: 60px; /* To sprawia, że strona przewija się dokładnie do nagłówka */
-    }
-    
-    .contactTitle h3 { font-family: "Cormorant Garamond", serif; font-size: 24px; margin-bottom: 12px; }
-    form { display: grid; gap: 12px; margin-top: 20px; }
-    input, textarea {
-      width: 100%; padding: 14px; border: 1px solid var(--line); border-radius: 4px;
-      background: var(--bg); font-family: inherit; font-size: 14px; transition: var(--transition);
-    }
-    input:focus, textarea:focus { outline: none; border-color: var(--ink); background: #fff; }
-
-    /* Footer */
-    .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); color: var(--muted2); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
-    .disclaimer { margin-top: 16px; max-width: 80ch; line-height: 1.8; opacity: 0.6; }
-
-    @media (max-width: 1024px) {
-      .layout { grid-template-columns: 1fr; gap: 48px; }
-      .rail { position: static; }
-    }
-    @media (max-width: 640px) {
-      .nav { grid-template-columns: 1fr; text-align: center; }
-      .navLeft, .navRight { justify-content: center; }
-      .process, .grid2 { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-    <nav class="nav">
-      <div class="navLeft">
-        <a href="#pricing">Pricing</a>
-        <a href="full-scope.html">Full scope</a>
-        <a href="impressum.html">Impressum</a>
-      </div>
-      <div class="logo">EIC Readiness Studio</div>
-      <div class="navRight">
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
-
-    <div class="layout">
-      <main>
-        <section class="hero">
-          <p class="kicker">EIC Accelerator · Stage 1 → Stage 2</p>
-          <h1>EIC Readiness Studio</h1>
-          <p class="sub">
-            Build a <strong>fundable EIC case</strong> (Story + Evidence + Execution) — fast, focused, reviewer-aligned.
-            No generic consulting. Only credible, high-probability cases.
-          </p>
-
-          <div class="pills">
-            <span class="pill">7-day GO / NO-GO diagnostic</span>
-            <span class="pill">Evidence-first strategy</span>
-            <span class="pill">Clear outcome tiers</span>
-          </div>
-
-          <div class="heroMedia">
-            <img src="assets/hero.png" alt="EIC Readiness Studio Strategic Planning">
-          </div>
-
-          <div class="sectionWash">
-            <div class="block">
-              <h2>EIC is brutally competitive</h2>
-              <p>Winning requires:</p>
-              <ul>
-                <li>Breakthrough innovation logic</li>
-                <li>Credible validation</li>
-                <li>A defensible commercial pathway</li>
-              </ul>
-              <p style="margin-top:10px;">Polished text is not enough.</p>
-            </div>
-          </div>
-
-          <div class="grid2">
-            <div class="block">
-              <h2>Why most applications fail</h2>
-              <ul>
-                <li><strong>Strategy gap:</strong> forms get filled, but the narrative isn’t fundable.</li>
-                <li><strong>Validation gap:</strong> claims aren’t supported by strong evidence.</li>
-                <li><strong>Commercial gap:</strong> weak go-to-market logic.</li>
-              </ul>
-            </div>
-            <div class="block">
-              <h2>Our model</h2>
-              <p>We only take projects with a credible path to success.</p>
-              <ul>
-                <li>Strategic narrative</li>
-                <li>Evidence-backed claims</li>
-                <li>Execution-ready roadmap</li>
-              </ul>
-              <p style="margin-top:10px;">If it’s not fundable — we say no.</p>
-            </div>
-          </div>
-
-          <div class="process">
-            <div class="step">
-              <div class="num">Step 01</div>
-              <h3>Diagnostic Sprint</h3>
-              <p>GO/NO-GO decision, Fit Score, evidence gap analysis, and a clear action plan.</p>
-            </div>
-            <div class="step">
-              <div class="num">Step 02</div>
-              <h3>EIC Submit-Ready (Stage 1)</h3>
-              <p>Short application narrative + evaluator-aligned deck storyline + video script + Video Clarity Lab + Coherence Check + final QA.</p>
-            </div>
-            <div class="step">
-              <div class="num">Step 03</div>
-              <h3>EIC Investment-Ready (Stage 2)</h3>
-              <p>Full proposal + financial plan & investment logic + Coherence Check — activated only upon invitation.</p>
-            </div>
-          </div>
-        </main>
-
-      <aside class="rail" id="pricing">
-        <div class="railTop">
-          <h2>Choose your readiness tier</h2>
-          <span>Fixed scope</span>
-        </div>
-
-        <div class="plan">
-          <div class="planHeader">
-            <div class="planName">Diagnostic Sprint</div>
-            <div class="price">€1,200</div>
-          </div>
-          <span class="tag">7 days</span>
-          <ul>
-            <li>GO / NO-GO decision + Fit Score</li>
-            <li>Evidence gap analysis</li>
-            <li>Clear action plan</li>
-          </ul>
-        </div>
-
-        <div class="plan">
-          <div class="planHeader">
-            <div class="planName">EIC Submit-Ready</div>
-            <div class="price">€4,900</div>
-          </div>
-          <span class="tag">Stage 1</span>
-          <ul>
-            <li>Stage 1 short application narrative</li>
-            <li>Evaluator-aligned pitch deck storyline</li>
-            <li>Video script + Video Clarity Lab + Coherence Check + Final QA (up to 2 revisions)</li>
-          </ul>
-        </div>
-
-        <div class="plan">
-          <div class="planHeader">
-            <div class="planName">EIC Investment-Ready</div>
-            <div class="price">€6,900 <span class="fee">+ success fee</span></div>
-          </div>
-          <span class="tag">Stage 2 (invitation)</span>
-          <ul>
-            <li>Full Stage 2 proposal</li>
-            <li>Financial plan & investment logic</li>
-            <li>Coherence Check (Stage 2) + Final QA (2 revisions)</li>
-          </ul>
-        </div>
-
-        <div class="contactTitle" id="contact">
-          <h3>Contact</h3>
-          <p>Send a quick note — we’ll reply with next steps.</p>
-          <form id="contactForm" action="https://formspree.io/f/xvzbdzwj" method="POST">
-            <input type="text" name="name" placeholder="Your name" required />
-            <input type="email" name="email" placeholder="Email" required />
-            <textarea name="message" placeholder="Message" required></textarea>
-            <button class="btn primary" type="submit">Send</button>
-            <span id="formStatus" style="font-size: 12px; margin-top: 10px; display: block;"></span>
-          </form>
-        </div>
-      </aside>
-    </div>
-
-    <footer class="footer">
-      <div>© 2026 EIC Readiness Studio · <a href="impressum.html">Impressum</a></div>
-      <div class="disclaimer">Independent proposal studio. Not affiliated with the European Innovation Council (EIC) or the European Commission.</div>
-    </footer>
-  </div>
-
-  <script>
-    const form = document.getElementById("contactForm");
-    const statusEl = document.getElementById("formStatus");
-    if(form) {
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        statusEl.textContent = "Sending...";
-        try {
-          const res = await fetch(form.action, {
-            method: "POST",
-            body: new FormData(form),
-            headers: { "Accept": "application/json" }
-          });
-          if(res.ok) {
-            statusEl.style.color = "#0f6b4f";
-            statusEl.textContent = "Thank you — message sent.";
-            form.reset();
-          } else {
-            statusEl.textContent = "Something went wrong. Please try again.";
-          }
-        } catch(err) {
-          statusEl.textContent = "Network error.";
-        }
-      });
-    }
-  </script>
-</body>
-</html>
+      font-weight
