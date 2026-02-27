@@ -147,34 +147,34 @@
     
     .heroMedia:hover img { transform: scale(1.02); filter: grayscale(0%) contrast(1.05); }
 
-    /* Section Wash */
+    /* Poprawione sekcje: Zredukowany Padding */
     .sectionWash {
       background: #fff;
       border: 1px solid var(--line2);
-      padding: 40px;
-      margin-top: 56px;
+      padding: 24px 32px; /* Zredukowane z 40px */
+      margin-top: 42px;
     }
 
     .grid2 {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-      margin-top: 56px; padding-top: 56px; border-top: 1px solid var(--line);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+      margin-top: 42px; padding-top: 42px; border-top: 1px solid var(--line);
     }
 
     .block h2 {
-      margin: 0 0 20px;
+      margin: 0 0 16px;
       font-family: "Cormorant Garamond", serif;
       font-weight: 600;
-      font-size: 28px;
+      font-size: 26px; /* Delikatnie mniejszy dla lepszych proporcji */
       line-height: 1.2;
     }
 
-    .block p, .block li { color: var(--muted); font-size: 15px; line-height: 1.8; }
-    .block ul { padding-left: 20px; }
-    .block li { margin: 10px 0; }
+    .block p, .block li { color: var(--muted); font-size: 15px; line-height: 1.7; }
+    .block ul { padding-left: 20px; margin: 8px 0; }
+    .block li { margin: 6px 0; }
 
     /* Process Steps */
     .process {
-      margin-top: 56px; padding-top: 56px; border-top: 1px solid var(--line);
+      margin-top: 42px; padding-top: 42px; border-top: 1px solid var(--line);
       display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;
     }
 
@@ -218,8 +218,14 @@
     .btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
     .btn.primary:hover { opacity: 0.9; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
-    /* Form */
-    .contactTitle { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--line); }
+    /* Poprawka przesunięcia dla formularza */
+    .contactTitle { 
+      margin-top: 32px; 
+      padding-top: 32px; 
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 60px; /* To sprawia, że strona przewija się dokładnie do nagłówka */
+    }
+    
     .contactTitle h3 { font-family: "Cormorant Garamond", serif; font-size: 24px; margin-bottom: 12px; }
     form { display: grid; gap: 12px; margin-top: 20px; }
     input, textarea {
