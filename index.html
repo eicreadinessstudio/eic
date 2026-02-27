@@ -36,7 +36,6 @@
 
     a { color: inherit; text-decoration: none; transition: var(--transition); }
 
-    /* Editorial Layout */
     .wrap { max-width: var(--max); margin: 0 auto; padding: 48px 24px 96px; }
 
     /* Nav */
@@ -74,7 +73,7 @@
 
     .nav a:hover { color: var(--ink); }
 
-    /* Main Layout */
+    /* Layout */
     .layout {
       display: grid;
       grid-template-columns: 1.3fr .7fr;
@@ -148,13 +147,12 @@
     
     .heroMedia:hover img { transform: scale(1.02); filter: grayscale(0%) contrast(1.05); }
 
-    /* Content Blocks */
+    /* Section Wash */
     .sectionWash {
       background: #fff;
       border: 1px solid var(--line2);
       padding: 40px;
       margin-top: 56px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.01);
     }
 
     .grid2 {
@@ -207,7 +205,6 @@
     .tag { display: inline-block; margin: 12px 0; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted2); border: 1px solid var(--line); padding: 2px 8px; border-radius: 4px; }
     .plan ul { padding-left: 18px; margin: 12px 0; font-size: 13.5px; color: var(--muted); }
 
-    /* Buttons */
     .btn {
       display: inline-flex; justify-content: center; align-items: center;
       padding: 12px 24px; border: 1px solid var(--line);
@@ -235,17 +232,14 @@
     .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); color: var(--muted2); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
     .disclaimer { margin-top: 16px; max-width: 80ch; line-height: 1.8; opacity: 0.6; }
 
-    /* Responsive */
     @media (max-width: 1024px) {
       .layout { grid-template-columns: 1fr; gap: 48px; }
       .rail { position: static; }
-      h1 { font-size: 44px; }
     }
     @media (max-width: 640px) {
       .nav { grid-template-columns: 1fr; text-align: center; }
       .navLeft, .navRight { justify-content: center; }
       .process, .grid2 { grid-template-columns: 1fr; }
-      .sectionWash { padding: 24px; }
     }
   </style>
 </head>
@@ -268,9 +262,10 @@
       <main>
         <section class="hero">
           <p class="kicker">EIC Accelerator · Stage 1 → Stage 2</p>
-          <h1>Building credible, high-probability EIC cases.</h1>
+          <h1>EIC Readiness Studio</h1>
           <p class="sub">
-            We help deep-tech founders build a <strong>fundable EIC case</strong> through a rigorous, evidence-first approach. Focused, reviewer-aligned, and execution-ready.
+            Build a <strong>fundable EIC case</strong> (Story + Evidence + Execution) — fast, focused, reviewer-aligned.
+            No generic consulting. Only credible, high-probability cases.
           </p>
 
           <div class="pills">
@@ -286,7 +281,13 @@
           <div class="sectionWash">
             <div class="block">
               <h2>EIC is brutally competitive</h2>
-              <p>Winning requires more than just a polished text. It requires a breakthrough innovation logic, credible validation, and a defensible commercial pathway.</p>
+              <p>Winning requires:</p>
+              <ul>
+                <li>Breakthrough innovation logic</li>
+                <li>Credible validation</li>
+                <li>A defensible commercial pathway</li>
+              </ul>
+              <p style="margin-top:10px;">Polished text is not enough.</p>
             </div>
           </div>
 
@@ -294,41 +295,46 @@
             <div class="block">
               <h2>Why most applications fail</h2>
               <ul>
-                <li><strong>Strategy gap:</strong> The narrative lacks fundable substance.</li>
-                <li><strong>Validation gap:</strong> Claims aren't backed by evidence.</li>
-                <li><strong>Commercial gap:</strong> Weak or generic go-to-market logic.</li>
+                <li><strong>Strategy gap:</strong> forms get filled, but the narrative isn’t fundable.</li>
+                <li><strong>Validation gap:</strong> claims aren’t supported by strong evidence.</li>
+                <li><strong>Commercial gap:</strong> weak go-to-market logic.</li>
               </ul>
             </div>
             <div class="block">
               <h2>Our model</h2>
-              <p>We only accept projects with a clear path to success. If we don't believe it's fundable, we say so from day one.</p>
+              <p>We only take projects with a credible path to success.</p>
+              <ul>
+                <li>Strategic narrative</li>
+                <li>Evidence-backed claims</li>
+                <li>Execution-ready roadmap</li>
+              </ul>
+              <p style="margin-top:10px;">If it’s not fundable — we say no.</p>
             </div>
           </div>
 
           <div class="process">
             <div class="step">
-              <div class="num">01</div>
+              <div class="num">Step 01</div>
               <h3>Diagnostic Sprint</h3>
-              <p>Critical analysis of your case, Fit Score, and a clear execution plan.</p>
+              <p>GO/NO-GO decision, Fit Score, evidence gap analysis, and a clear action plan.</p>
             </div>
             <div class="step">
-              <div class="num">02</div>
-              <h3>Submit-Ready</h3>
-              <p>Complete Stage 1 package: narrative, deck storyline, and video lab.</p>
+              <div class="num">Step 02</div>
+              <h3>EIC Submit-Ready (Stage 1)</h3>
+              <p>Short application narrative + evaluator-aligned deck storyline + video script + Video Clarity Lab + Coherence Check + final QA.</p>
             </div>
             <div class="step">
-              <div class="num">03</div>
-              <h3>Investment-Ready</h3>
-              <p>Full Stage 2 proposal and financial logic for invited founders.</p>
+              <div class="num">Step 03</div>
+              <h3>EIC Investment-Ready (Stage 2)</h3>
+              <p>Full proposal + financial plan & investment logic + Coherence Check — activated only upon invitation.</p>
             </div>
           </div>
-        </section>
-      </main>
+        </main>
 
       <aside class="rail" id="pricing">
         <div class="railTop">
-          <h2>Readiness Tiers</h2>
-          <span>Fixed scope & transparent pricing</span>
+          <h2>Choose your readiness tier</h2>
+          <span>Fixed scope</span>
         </div>
 
         <div class="plan">
@@ -336,11 +342,11 @@
             <div class="planName">Diagnostic Sprint</div>
             <div class="price">€1,200</div>
           </div>
-          <span class="tag">7 Days</span>
+          <span class="tag">7 days</span>
           <ul>
-            <li>GO / NO-GO Fit Score</li>
+            <li>GO / NO-GO decision + Fit Score</li>
             <li>Evidence gap analysis</li>
-            <li>Strategic action plan</li>
+            <li>Clear action plan</li>
           </ul>
         </div>
 
@@ -351,9 +357,9 @@
           </div>
           <span class="tag">Stage 1</span>
           <ul>
-            <li>Short application narrative</li>
-            <li>Pitch deck storyline</li>
-            <li>Video Clarity Lab & QA</li>
+            <li>Stage 1 short application narrative</li>
+            <li>Evaluator-aligned pitch deck storyline</li>
+            <li>Video script + Video Clarity Lab + Coherence Check + Final QA (up to 2 revisions)</li>
           </ul>
         </div>
 
@@ -362,22 +368,22 @@
             <div class="planName">EIC Investment-Ready</div>
             <div class="price">€6,900 <span class="fee">+ success fee</span></div>
           </div>
-          <span class="tag">Stage 2</span>
+          <span class="tag">Stage 2 (invitation)</span>
           <ul>
             <li>Full Stage 2 proposal</li>
             <li>Financial plan & investment logic</li>
-            <li>Coherence Check & QA</li>
+            <li>Coherence Check (Stage 2) + Final QA (2 revisions)</li>
           </ul>
         </div>
 
         <div class="contactTitle" id="contact">
           <h3>Contact</h3>
-          <p>Start with a quick note. We'll reply within 24 hours.</p>
+          <p>Send a quick note — we’ll reply with next steps.</p>
           <form id="contactForm" action="https://formspree.io/f/xvzbdzwj" method="POST">
-            <input type="text" name="name" placeholder="Name" required />
+            <input type="text" name="name" placeholder="Your name" required />
             <input type="email" name="email" placeholder="Email" required />
-            <textarea name="message" placeholder="Briefly describe your innovation" required></textarea>
-            <button class="btn primary" type="submit">Send Message</button>
+            <textarea name="message" placeholder="Message" required></textarea>
+            <button class="btn primary" type="submit">Send</button>
             <span id="formStatus" style="font-size: 12px; margin-top: 10px; display: block;"></span>
           </form>
         </div>
@@ -405,10 +411,10 @@
           });
           if(res.ok) {
             statusEl.style.color = "#0f6b4f";
-            statusEl.textContent = "Thank you. We will be in touch shortly.";
+            statusEl.textContent = "Thank you — message sent.";
             form.reset();
           } else {
-            statusEl.textContent = "Error sending message. Please try again.";
+            statusEl.textContent = "Something went wrong. Please try again.";
           }
         } catch(err) {
           statusEl.textContent = "Network error.";
