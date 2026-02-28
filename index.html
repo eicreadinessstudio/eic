@@ -81,7 +81,6 @@
     .navLeft { justify-content: flex-start; }
     .navRight { justify-content: flex-end; }
 
-    /* ✅ Premium Theme Toggle (Minimalist SVG) */
     .theme-toggle {
       background: none;
       border: none;
@@ -139,6 +138,31 @@
     .pills { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
     .pill { border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; background: transparent; }
 
+    /* TRL Section Styles */
+    .trl-container { margin-top: 64px; border-bottom: 1px solid var(--line); padding-bottom: 64px; }
+    .trl-nav { display: flex; justify-content: space-between; position: relative; margin-bottom: 42px; padding: 0 10px; }
+    .trl-nav::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--line); z-index: 1; }
+    .trl-dot { position: relative; z-index: 2; width: 42px; height: 42px; background: var(--bg); border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: 16px; cursor: pointer; transition: var(--transition); }
+    .trl-dot:hover { border-color: var(--ink); }
+    .trl-dot.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    
+    .trl-content { position: relative; min-height: 240px; }
+    .trl-pane { display: none; animation: fadeIn 0.5s ease forwards; }
+    .trl-pane.active { display: block; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .trl-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 16px; }
+    .trl-title { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 600; margin: 0; }
+    .trl-tag { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted2); font-weight: 600; }
+    .trl-desc { color: var(--muted); font-size: 16px; line-height: 1.8; max-width: 75ch; margin-bottom: 24px; }
+    .trl-focus { background: var(--surface); border: 1px solid var(--line2); padding: 20px 24px; border-radius: 4px; }
+    .trl-focus strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink); margin-bottom: 8px; }
+    .trl-focus p { margin: 0; font-size: 14px; color: var(--muted); }
+
     .heroMedia { margin-top: 42px; position: relative; background: var(--surface); border: 1px solid rgba(11,15,20,.08); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
     .heroMedia img { width: 100%; height: auto; display: block; filter: grayscale(100%) contrast(1.05) brightness(0.95); transition: var(--transition); }
     .heroMedia:hover img { transform: scale(1.02); filter: grayscale(0%) contrast(1.05); }
@@ -185,7 +209,10 @@
     .disclaimer { margin-top: 16px; max-width: 80ch; line-height: 1.8; opacity: 0.6; }
 
     @media (max-width: 1024px) { .layout { grid-template-columns: 1fr; gap: 48px; } .rail { position: static; background: var(--surface); backdrop-filter: none; } }
-    @media (max-width: 640px) { .nav { grid-template-columns: 1fr; text-align: center; } .navLeft, .navRight { justify-content: center; } .process, .grid2 { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { 
+      .nav { grid-template-columns: 1fr; text-align: center; } .navLeft, .navRight { justify-content: center; } .process, .grid2 { grid-template-columns: 1fr; }
+      .trl-dot { width: 32px; height: 32px; font-size: 14px; }
+    }
   </style>
 </head>
 
@@ -214,14 +241,104 @@
           <h1>EIC Readiness Studio</h1>
           <p class="sub">Build a <strong>fundable EIC case</strong> (Story + Evidence + Execution) — fast, focused, reviewer-aligned. No generic consulting. Only credible, high-probability cases.</p>
           <div class="pills"><span class="pill">7-day GO / NO-GO diagnostic</span><span class="pill">Evidence-first strategy</span><span class="pill">Clear outcome tiers</span></div>
-          <div class="heroMedia"><img src="assets/hero.png" alt="EIC Readiness Studio Strategic Planning"></div>
+          
+          <div class="trl-container reveal">
+            <p class="kicker">Check your TRL Alignment</p>
+            <div class="trl-nav">
+              <div class="trl-dot active" data-trl="4">4</div>
+              <div class="trl-dot" data-trl="5">5</div>
+              <div class="trl-dot" data-trl="6">6</div>
+              <div class="trl-dot" data-trl="7">7</div>
+              <div class="trl-dot" data-trl="8">8</div>
+              <div class="trl-dot" data-trl="9">9</div>
+            </div>
+            
+            <div class="trl-content">
+              <div class="trl-pane active" id="trl-4">
+                <div class="trl-header">
+                  <h3 class="trl-title">Technology validated in lab</h3>
+                  <span class="trl-tag">Entry Point</span>
+                </div>
+                <p class="trl-desc">The basic technological components are integrated to establish that they will work together. Validation is performed in a laboratory environment to prove the concept.</p>
+                <div class="trl-focus">
+                  <strong>Studio Focus</strong>
+                  <p>We analyze if your lab evidence is sufficient to trigger a Stage 1 application or if a specific "Evidence Sprint" is needed first.</p>
+                </div>
+              </div>
+              
+              <div class="trl-pane" id="trl-5">
+                <div class="trl-header">
+                  <h3 class="trl-title">Validated in relevant environment</h3>
+                  <span class="trl-tag">Transition</span>
+                </div>
+                <p class="trl-desc">Technology components are integrated with reasonably realistic supporting elements so it can be tested in a simulated or "relevant" environment.</p>
+                <div class="trl-focus">
+                  <strong>Studio Focus</strong>
+                  <p>Translating technical validation data into a breakthrough narrative. Essential for proving the "Innovation" pillar of the EIC.</p>
+                </div>
+              </div>
+
+              <div class="trl-pane" id="trl-6">
+                <div class="trl-header">
+                  <h3 class="trl-title">Demonstrated in relevant environment</h3>
+                  <span class="trl-tag">Sweet Spot</span>
+                </div>
+                <p class="trl-desc">A representative model or prototype is tested in a relevant environment. This represents a major step up in a technology's demonstrated readiness.</p>
+                <div class="trl-focus">
+                  <strong>Studio Focus</strong>
+                  <p>This is the prime entry for EIC Accelerator. We focus on the Execution roadmap and building a defensible Stage 2 business case.</p>
+                </div>
+              </div>
+
+              <div class="trl-pane" id="trl-7">
+                <div class="trl-header">
+                  <h3 class="trl-title">System prototype in operational environment</h3>
+                  <span class="trl-tag">Scaling</span>
+                </div>
+                <p class="trl-desc">Prototype is near or at the planned operational system level. It requires demonstration of an actual system prototype in an operational environment.</p>
+                <div class="trl-focus">
+                  <strong>Studio Focus</strong>
+                  <p>Focusing on the "Commercialization" pillar. We define the Go-to-Market strategy and pilot-to-scale transition logic.</p>
+                </div>
+              </div>
+
+              <div class="trl-pane" id="trl-8">
+                <div class="trl-header">
+                  <h3 class="trl-title">System complete and qualified</h3>
+                  <span class="trl-tag">Deployment</span>
+                </div>
+                <p class="trl-desc">Technology has been proven to work in its final form and under expected conditions. In most cases, this TRL represents the end of true system development.</p>
+                <div class="trl-focus">
+                  <strong>Studio Focus</strong>
+                  <p>Preparing for the Equity component. We align your financials and investment case for the EIC Fund and private co-investors.</p>
+                </div>
+              </div>
+
+              <div class="trl-pane" id="trl-9">
+                <div class="trl-header">
+                  <h3 class="trl-title">Actual system proven in operational environment</h3>
+                  <span class="trl-tag">Market Entry</span>
+                </div>
+                <p class="trl-desc">Actual application of the technology in its final form and under real-life conditions, such as those encountered in operational missions or commercial markets.</p>
+                <div class="trl-focus">
+                  <strong>Studio Focus</strong>
+                  <p>Strategic positioning for late-stage EIC support or follow-on investment logic for global expansion.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="heroMedia reveal"><img src="assets/hero.png" alt="EIC Readiness Studio Strategic Planning"></div>
+          
           <div class="sectionWash reveal">
             <div class="block"><h2>EIC is brutally competitive</h2><p>Winning requires:</p><ul><li>Breakthrough innovation logic</li><li>Credible validation</li><li>A defensible commercial pathway</li></ul><p style="margin-top:10px;">Polished text is not enough.</p></div>
           </div>
+          
           <div class="grid2">
             <div class="block reveal"><h2>Why most applications fail</h2><ul><li><strong>Strategy gap:</strong> forms get filled, but the narrative isn’t fundable.</li><li><strong>Validation gap:</strong> claims aren’t supported by strong evidence.</li><li><strong>Commercial gap:</strong> weak go-to-market logic.</li></ul></div>
             <div class="block reveal"><h2>Our model</h2><p>We only take projects with a credible path to success.</p><ul><li>Strategic narrative</li><li>Evidence-backed claims</li><li>Execution-ready roadmap</li></ul><p style="margin-top:10px;">If it’s not fundable — we say no.</p></div>
           </div>
+          
           <div class="process reveal">
             <div class="step"><div class="num">Step 01</div><h3>Diagnostic Sprint</h3><p>GO/NO-GO decision, Fit Score, evidence gap analysis, and a clear action plan.</p></div>
             <div class="step"><div class="num">Step 02</div><h3>EIC Submit-Ready (Stage 1)</h3><p>Short application narrative + evaluator-aligned deck storyline + video script + Video Clarity Lab + Coherence Check + final QA.</p></div>
@@ -251,6 +368,23 @@
   </div>
 
   <script>
+    // TRL Logic
+    const trlDots = document.querySelectorAll('.trl-dot');
+    const trlPanes = document.querySelectorAll('.trl-pane');
+
+    trlDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const target = dot.getAttribute('data-trl');
+        
+        trlDots.forEach(d => d.classList.remove('active'));
+        trlPanes.forEach(p => p.classList.remove('active'));
+        
+        dot.classList.add('active');
+        document.getElementById(`trl-${target}`).classList.add('active');
+      });
+    });
+
+    // Theme Toggle
     const themeBtn = document.getElementById("theme-btn");
     const sunIcon = document.getElementById("sun-icon");
     const moonIcon = document.getElementById("moon-icon");
