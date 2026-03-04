@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- ✅ reCAPTCHA v2 checkbox ("I'm not a robot") -->
+  <!-- reCAPTCHA v2 checkbox (force English) -->
   <script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
 
   <style>
@@ -194,9 +194,6 @@
 
     @media (max-width: 1024px) { .layout { grid-template-columns: 1fr; gap: 48px; } .rail { position: static; background: var(--surface); backdrop-filter: none; } }
     @media (max-width: 640px) { .nav { grid-template-columns: 1fr; text-align: center; } .navLeft, .navRight { justify-content: center; } .process, .grid2 { grid-template-columns: 1fr; } .hero-actions { flex-direction: column; align-items: stretch; } }
-
-    /* Optional: spacing for captcha block */
-    .g-recaptcha { margin-top: 6px; }
   </style>
 </head>
 
@@ -254,16 +251,13 @@
         <div class="plan"><div class="planHeader"><div class="planName">EIC Submit-Ready</div><div class="price">€4,900</div></div><span class="tag">Stage 1</span><ul><li>Stage 1 short application narrative</li><li>Evaluator-aligned pitch deck storyline</li><li>Video script + Video Clarity Lab + Coherence Check + Final QA (up to 2 revisions)</li></ul></div>
         <div class="plan"><div class="planHeader"><div class="planName">EIC Investment-Ready</div><div class="price">€6,900 <span class="fee">+ success fee</span></div></div><span class="tag">Stage 2 (invitation)</span><ul><li>Full Stage 2 proposal</li><li>Financial plan & investment logic</li><li>Coherence Check (Stage 2) + Final QA (2 revisions)</li></ul></div>
 
-        <div class="contactTitle">
-          <h3>Contact</h3>
-          <p>Send a quick note — we’ll reply with next steps.</p>
-
+        <div class="contactTitle"><h3>Contact</h3><p>Send a quick note — we’ll reply with next steps.</p>
           <form id="contactForm" action="https://formspree.io/f/xvzbdzwj" method="POST">
             <input type="text" name="name" placeholder="Your name" required />
             <input type="email" name="email" placeholder="Email" required />
             <textarea name="message" placeholder="Message" required></textarea>
 
-            <!-- ✅ Visible "I'm not a robot" checkbox -->
+            <!-- reCAPTCHA v2 checkbox widget -->
             <div class="g-recaptcha" data-sitekey="6Le5Rn8sAAAAAHzIK6l9z0A90pCSS-bkt-TTx3-U"></div>
 
             <button class="btn primary" type="submit">Send</button>
@@ -273,11 +267,7 @@
         </div>
       </aside>
     </div>
-
-    <footer class="footer">
-      <div>© 2026 EIC Readiness Studio · <a href="impressum.html">Impressum</a></div>
-      <div class="disclaimer">Independent proposal studio. Not affiliated with the European Innovation Council (EIC) or the European Commission.</div>
-    </footer>
+    <footer class="footer"><div>© 2026 EIC Readiness Studio · <a href="impressum.html">Impressum</a></div><div class="disclaimer">Independent proposal studio. Not affiliated with the European Innovation Council (EIC) or the European Commission.</div></footer>
   </div>
 
   <script>
@@ -329,15 +319,6 @@
         statusEl.textContent = "Sending...";
         statusEl.style.color = "";
 
-        // ✅ require checkbox token
-        if (typeof grecaptcha !== "undefined") {
-          const token = grecaptcha.getResponse();
-          if (!token) {
-            statusEl.textContent = "Please confirm 'I’m not a robot'.";
-            return;
-          }
-        }
-
         try {
           const res = await fetch(form.action, {
             method: "POST",
@@ -349,7 +330,7 @@
             statusEl.style.color = "#0f6b4f";
             statusEl.textContent = "Thank you — message sent.";
             form.reset();
-            if (typeof grecaptcha !== "undefined") grecaptcha.reset();
+            if (window.grecaptcha) window.grecaptcha.reset();
           } else {
             statusEl.style.color = "";
             statusEl.textContent = "Something went wrong. Please try again.";
