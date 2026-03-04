@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     :root {
       --bg: #f4f6f8;
@@ -192,6 +192,9 @@
     @media (max-width: 1024px) { .layout { grid-template-columns: 1fr; gap: 48px; } .rail { position: static; background: var(--surface); backdrop-filter: none; } }
     @media (max-width: 640px) { .nav { grid-template-columns: 1fr; text-align: center; } .navLeft, .navRight { justify-content: center; } .process, .grid2 { grid-template-columns: 1fr; } .hero-actions { flex-direction: column; align-items: stretch; } }
   </style>
+
+  <!-- reCAPTCHA v3 (site key) -->
+  <script src="https://www.google.com/recaptcha/api.js?render=6Le5Rn8sAAAAAHzIK6l9z0A90pCSS-bkt-TTx3-U"></script>
 </head>
 
 <body>
@@ -247,7 +250,11 @@
         <div class="plan"><div class="planHeader"><div class="planName">Diagnostic Sprint</div><div class="price">€1,200</div></div><span class="tag">7 days</span><ul><li>GO / NO-GO decision + Fit Score</li><li>Evidence gap analysis</li><li>Clear action plan</li></ul></div>
         <div class="plan"><div class="planHeader"><div class="planName">EIC Submit-Ready</div><div class="price">€4,900</div></div><span class="tag">Stage 1</span><ul><li>Stage 1 short application narrative</li><li>Evaluator-aligned pitch deck storyline</li><li>Video script + Video Clarity Lab + Coherence Check + Final QA (up to 2 revisions)</li></ul></div>
         <div class="plan"><div class="planHeader"><div class="planName">EIC Investment-Ready</div><div class="price">€6,900 <span class="fee">+ success fee</span></div></div><span class="tag">Stage 2 (invitation)</span><ul><li>Full Stage 2 proposal</li><li>Financial plan & investment logic</li><li>Coherence Check (Stage 2) + Final QA (2 revisions)</li></ul></div>
-        <div class="contactTitle"><h3>Contact</h3><p>Send a quick note — we’ll reply with next steps.</p>
+
+        <div class="contactTitle">
+          <h3>Contact</h3>
+          <p>Send a quick note — we’ll reply with next steps.</p>
+
           <form id="contactForm" action="https://formspree.io/f/xvzbdzwj" method="POST">
             <input type="text" name="name" placeholder="Your name" required />
             <input type="email" name="email" placeholder="Email" required />
@@ -259,10 +266,16 @@
         </div>
       </aside>
     </div>
-    <footer class="footer"><div>© 2026 EIC Readiness Studio · <a href="impressum.html">Impressum</a></div><div class="disclaimer">Independent proposal studio. Not affiliated with the European Innovation Council (EIC) or the European Commission.</div></footer>
+
+    <footer class="footer">
+      <div>© 2026 EIC Readiness Studio · <a href="impressum.html">Impressum</a></div>
+      <div class="disclaimer">Independent proposal studio. Not affiliated with the European Innovation Council (EIC) or the European Commission.</div>
+    </footer>
   </div>
 
   <script>
+    const RECAPTCHA_SITE_KEY = "6Le5Rn8sAAAAAHzIK6l9z0A90pCSS-bkt-TTx3-U";
+
     const themeBtn = document.getElementById("theme-btn");
     const sunIcon = document.getElementById("sun-icon");
     const moonIcon = document.getElementById("moon-icon");
@@ -304,15 +317,53 @@
 
     const form = document.getElementById("contactForm");
     const statusEl = document.getElementById("formStatus");
-    if(form) {
+
+    async function getRecaptchaToken(action) {
+      if (!window.grecaptcha || !window.grecaptcha.execute) {
+        throw new Error("reCAPTCHA not loaded");
+      }
+      return await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action });
+    }
+
+    if (form) {
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
         statusEl.textContent = "Sending...";
+        statusEl.style.color = "";
+
         try {
-          const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } });
-          if(res.ok) { statusEl.style.color = "#0f6b4f"; statusEl.textContent = "Thank you — message sent."; form.reset(); }
-          else { statusEl.style.color = ""; statusEl.textContent = "Something went wrong. Please try again."; }
-        } catch(err) { statusEl.style.color = ""; statusEl.textContent = "Network error."; }
+          // Ensure grecaptcha is ready
+          await new Promise((resolve) => {
+            if (window.grecaptcha && window.grecaptcha.ready) {
+              window.grecaptcha.ready(resolve);
+            } else {
+              resolve();
+            }
+          });
+
+          const token = await getRecaptchaToken("contact");
+
+          const fd = new FormData(form);
+          // Standard field name used by reCAPTCHA integrations:
+          fd.set("g-recaptcha-response", token);
+
+          const res = await fetch(form.action, {
+            method: "POST",
+            body: fd,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (res.ok) {
+            statusEl.style.color = "#0f6b4f";
+            statusEl.textContent = "Thank you — message sent.";
+            form.reset();
+          } else {
+            statusEl.textContent = "Something went wrong. Please try again.";
+          }
+        } catch (err) {
+          statusEl.textContent = "Network error.";
+        }
       });
     }
   </script>
