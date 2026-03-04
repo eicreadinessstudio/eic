@@ -8,9 +8,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
 
-  <!-- ✅ reCAPTCHA v2 checkbox (visible "I'm not a robot") -->
+  <!-- reCAPTCHA v2 Checkbox (force English UI) -->
   <script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
 
   <style>
@@ -48,8 +50,14 @@
       transform: translateY(0);
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
 
     body {
       margin: 0;
@@ -61,8 +69,17 @@
       transition: background 0.5s ease, color 0.5s ease;
     }
 
-    a { color: inherit; text-decoration: none; transition: var(--transition); }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 48px 24px 96px; }
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+    }
 
     .nav {
       display: grid;
@@ -73,7 +90,8 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .navLeft, .navRight {
+    .navLeft,
+    .navRight {
       display: flex;
       gap: 24px;
       align-items: center;
@@ -85,8 +103,13 @@
       font-weight: 500;
     }
 
-    .navLeft { justify-content: flex-start; }
-    .navRight { justify-content: flex-end; }
+    .navLeft {
+      justify-content: flex-start;
+    }
+
+    .navRight {
+      justify-content: flex-end;
+    }
 
     .theme-toggle {
       background: none;
@@ -103,8 +126,18 @@
       opacity: 0.8;
     }
 
-    .theme-toggle:hover { opacity: 1; transform: scale(1.1); }
-    .theme-toggle svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .theme-toggle:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .theme-toggle svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
 
     .logo {
       font-family: "Cormorant Garamond", serif;
@@ -137,18 +170,73 @@
       align-items: start;
     }
 
-    .anchor { height: 1px; margin-top: -1px; visibility: hidden; scroll-margin-top: 110px; }
+    .anchor {
+      height: 1px;
+      margin-top: -1px;
+      visibility: hidden;
+      scroll-margin-top: 110px;
+    }
 
-    .hero { border-bottom: 1px solid var(--line); padding-bottom: 42px; }
-    .kicker { font-size: 11px; text-transform: uppercase; letter-spacing: .15em; color: var(--muted2); margin: 0 0 16px; font-weight: 600; }
-    h1 { margin: 0 0 24px; font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: 54px; line-height: 1.1; letter-spacing: -0.02em; }
-    .sub { margin: 0 0 32px; color: var(--muted); font-size: 17px; line-height: 1.75; max-width: 62ch; }
-    .sub strong { color: var(--ink); font-weight: 600; }
+    .hero {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 42px;
+    }
 
-    .hero-actions { display: flex; gap: 16px; margin-bottom: 32px; align-items: center; }
+    .kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--muted2);
+      margin: 0 0 16px;
+      font-weight: 600;
+    }
 
-    .pills { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
-    .pill { border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; background: transparent; }
+    h1 {
+      margin: 0 0 24px;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: 54px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .sub {
+      margin: 0 0 32px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.75;
+      max-width: 62ch;
+    }
+
+    .sub strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      align-items: center;
+    }
+
+    .pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      background: transparent;
+    }
 
     .heroMedia {
       margin-top: 42px;
@@ -167,14 +255,51 @@
       transition: var(--transition);
     }
 
-    .heroMedia:hover img { transform: scale(1.02); filter: grayscale(0%) contrast(1.05); }
+    .heroMedia:hover img {
+      transform: scale(1.02);
+      filter: grayscale(0%) contrast(1.05);
+    }
 
-    .sectionWash { background: var(--surface); border: 1px solid var(--line2); padding: 24px 32px; margin-top: 42px; transition: background 0.5s ease; }
-    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 42px; padding-top: 42px; border-top: 1px solid var(--line); }
-    .block h2 { margin: 0 0 16px; font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: 26px; line-height: 1.2; }
-    .block p, .block li { color: var(--muted); font-size: 15px; line-height: 1.7; }
-    .block ul { padding-left: 20px; margin: 8px 0; }
-    .block li { margin: 6px 0; }
+    .sectionWash {
+      background: var(--surface);
+      border: 1px solid var(--line2);
+      padding: 24px 32px;
+      margin-top: 42px;
+      transition: background 0.5s ease;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 42px;
+      padding-top: 42px;
+      border-top: 1px solid var(--line);
+    }
+
+    .block h2 {
+      margin: 0 0 16px;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 1.2;
+    }
+
+    .block p,
+    .block li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .block ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+
+    .block li {
+      margin: 6px 0;
+    }
 
     .process {
       margin-top: 42px;
@@ -185,10 +310,31 @@
       gap: 32px;
     }
 
-    .step { border-top: 1px solid var(--ink); padding-top: 20px; transition: border-color 0.5s ease; }
-    .step .num { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted2); margin-bottom: 12px; }
-    .step h3 { font-family: "Cormorant Garamond", serif; font-size: 22px; margin: 0 0 12px; }
-    .step p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .step {
+      border-top: 1px solid var(--ink);
+      padding-top: 20px;
+      transition: border-color 0.5s ease;
+    }
+
+    .step .num {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted2);
+      margin-bottom: 12px;
+    }
+
+    .step h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 22px;
+      margin: 0 0 12px;
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
 
     .rail {
       position: sticky;
@@ -202,18 +348,61 @@
       transition: background 0.5s ease;
     }
 
-    [data-theme="dark"] .rail { background: rgba(22, 27, 34, 0.75); }
+    [data-theme="dark"] .rail {
+      background: rgba(22, 27, 34, 0.75);
+    }
 
-    .railTop { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 24px; }
-    .railTop h2 { font-family: "Cormorant Garamond", serif; font-size: 26px; margin: 0; }
-    .railTop span { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted2); }
+    .railTop {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
 
-    .plan { padding: 20px 0; border-bottom: 1px solid var(--line2); }
-    .planHeader { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-    .planName { font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
+    .railTop h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 26px;
+      margin: 0;
+    }
 
-    .price { font-weight: 600; font-size: 16px; text-align: right; }
-    .price .fee { display: block; font-size: 11px; color: var(--muted2); font-weight: 400; margin-top: 4px; }
+    .railTop span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted2);
+    }
+
+    .plan {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line2);
+    }
+
+    .planHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .planName {
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .price {
+      font-weight: 600;
+      font-size: 16px;
+      text-align: right;
+    }
+
+    .price .fee {
+      display: block;
+      font-size: 11px;
+      color: var(--muted2);
+      font-weight: 400;
+      margin-top: 4px;
+    }
 
     .tag {
       display: inline-block;
@@ -227,7 +416,12 @@
       border-radius: 4px;
     }
 
-    .plan ul { padding-left: 18px; margin: 12px 0; font-size: 13.5px; color: var(--muted); }
+    .plan ul {
+      padding-left: 18px;
+      margin: 12px 0;
+      font-size: 13.5px;
+      color: var(--muted);
+    }
 
     .btn {
       display: inline-flex;
@@ -246,7 +440,10 @@
       color: var(--ink);
     }
 
-    .btn:hover { background: var(--bg); transform: translateY(-1px); }
+    .btn:hover {
+      background: var(--bg);
+      transform: translateY(-1px);
+    }
 
     .btn.primary {
       background: var(--ink);
@@ -254,15 +451,39 @@
       border-color: var(--ink);
     }
 
-    .btn.primary:hover { opacity: 0.9; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+    .btn.primary:hover {
+      opacity: 0.9;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-    .microcopy { display: block; margin-top: 12px; font-size: 11px; color: var(--muted2); letter-spacing: 0.02em; }
+    .microcopy {
+      display: block;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--muted2);
+      letter-spacing: 0.02em;
+    }
 
-    .contactTitle { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--line); }
-    .contactTitle h3 { font-family: "Cormorant Garamond", serif; font-size: 24px; margin-bottom: 12px; }
+    .contactTitle {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
 
-    form { display: grid; gap: 12px; margin-top: 20px; }
-    input, textarea {
+    .contactTitle h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    input,
+    textarea {
       width: 100%;
       padding: 14px;
       border: 1px solid var(--line);
@@ -274,21 +495,69 @@
       color: var(--ink);
     }
 
-    input:focus, textarea:focus { outline: none; border-color: var(--ink); background: var(--surface); }
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--ink);
+      background: var(--surface);
+    }
 
-    .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); color: var(--muted2); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
-    .disclaimer { margin-top: 16px; max-width: 80ch; line-height: 1.8; opacity: 0.6; }
+    /* small spacing for the captcha */
+    .captchaWrap {
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+
+    .footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+      color: var(--muted2);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .disclaimer {
+      margin-top: 16px;
+      max-width: 80ch;
+      line-height: 1.8;
+      opacity: 0.6;
+    }
 
     @media (max-width: 1024px) {
-      .layout { grid-template-columns: 1fr; gap: 48px; }
-      .rail { position: static; background: var(--surface); backdrop-filter: none; }
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .rail {
+        position: static;
+        background: var(--surface);
+        backdrop-filter: none;
+      }
     }
 
     @media (max-width: 640px) {
-      .nav { grid-template-columns: 1fr; text-align: center; }
-      .navLeft, .navRight { justify-content: center; }
-      .process, .grid2 { grid-template-columns: 1fr; }
-      .hero-actions { flex-direction: column; align-items: stretch; }
+      .nav {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .navLeft,
+      .navRight {
+        justify-content: center;
+      }
+
+      .process,
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
     }
   </style>
 </head>
@@ -328,26 +597,17 @@
         <section class="hero reveal">
           <p class="kicker">EIC Accelerator · Stage 1 → Stage 2</p>
           <h1>EIC Readiness Studio</h1>
-          <p class="sub">
-            Build a <strong>fundable EIC case</strong> (Story + Evidence + Execution) — fast, focused, reviewer-aligned.
-            No generic consulting. Only credible, high-probability cases.
-          </p>
+          <p class="sub">Build a <strong>fundable EIC case</strong> (Story + Evidence + Execution) — fast, focused,
+            reviewer-aligned. No generic consulting. Only credible, high-probability cases.</p>
 
           <div class="hero-actions">
             <a href="#contact" class="btn primary">Get GO/NO-GO in 7 days</a>
             <a href="full-scope.html" class="btn">See full scope</a>
           </div>
 
-          <div class="pills">
-            <span class="pill">7-day GO / NO-GO diagnostic</span>
-            <span class="pill">Evidence-first strategy</span>
-            <span class="pill">Clear outcome tiers</span>
-          </div>
-
-          <div class="heroMedia">
-            <img src="assets/hero.png" alt="EIC Readiness Studio Strategic Planning">
-          </div>
-
+          <div class="pills"><span class="pill">7-day GO / NO-GO diagnostic</span><span class="pill">Evidence-first
+              strategy</span><span class="pill">Clear outcome tiers</span></div>
+          <div class="heroMedia"><img src="assets/hero.png" alt="EIC Readiness Studio Strategic Planning"></div>
           <div class="sectionWash reveal">
             <div class="block">
               <h2>EIC is brutally competitive</h2>
@@ -360,7 +620,6 @@
               <p style="margin-top:10px;">Polished text is not enough.</p>
             </div>
           </div>
-
           <div class="grid2">
             <div class="block reveal">
               <h2>Why most applications fail</h2>
@@ -370,7 +629,6 @@
                 <li><strong>Commercial gap:</strong> weak go-to-market logic.</li>
               </ul>
             </div>
-
             <div class="block reveal">
               <h2>Our model</h2>
               <p>We only take projects with a credible path to success.</p>
@@ -382,7 +640,6 @@
               <p style="margin-top:10px;">If it’s not fundable — we say no.</p>
             </div>
           </div>
-
           <div class="process reveal">
             <div class="step">
               <div class="num">Step 01</div>
@@ -392,57 +649,51 @@
             <div class="step">
               <div class="num">Step 02</div>
               <h3>EIC Submit-Ready (Stage 1)</h3>
-              <p>Short application narrative + evaluator-aligned deck storyline + video script + Video Clarity Lab + Coherence Check + final QA.</p>
+              <p>Short application narrative + evaluator-aligned deck storyline + video script + Video Clarity Lab +
+                Coherence Check + final QA.</p>
             </div>
             <div class="step">
               <div class="num">Step 03</div>
               <h3>EIC Investment-Ready (Stage 2)</h3>
-              <p>Full proposal + financial plan & investment logic + Coherence Check — activated only upon invitation.</p>
+              <p>Full proposal + financial plan & investment logic + Coherence Check — activated only upon invitation.
+              </p>
             </div>
           </div>
-
           <div id="contact" class="anchor" aria-hidden="true"></div>
         </section>
       </main>
 
       <aside class="rail reveal" id="pricing">
         <div class="railTop">
-          <h2>Choose your readiness tier</h2>
-          <span>Fixed scope</span>
+          <h2>Choose your readiness tier</h2><span>Fixed scope</span>
         </div>
-
         <div class="plan">
           <div class="planHeader">
             <div class="planName">Diagnostic Sprint</div>
             <div class="price">€1,200</div>
-          </div>
-          <span class="tag">7 days</span>
+          </div><span class="tag">7 days</span>
           <ul>
             <li>GO / NO-GO decision + Fit Score</li>
             <li>Evidence gap analysis</li>
             <li>Clear action plan</li>
           </ul>
         </div>
-
         <div class="plan">
           <div class="planHeader">
             <div class="planName">EIC Submit-Ready</div>
             <div class="price">€4,900</div>
-          </div>
-          <span class="tag">Stage 1</span>
+          </div><span class="tag">Stage 1</span>
           <ul>
             <li>Stage 1 short application narrative</li>
             <li>Evaluator-aligned pitch deck storyline</li>
             <li>Video script + Video Clarity Lab + Coherence Check + Final QA (up to 2 revisions)</li>
           </ul>
         </div>
-
         <div class="plan">
           <div class="planHeader">
             <div class="planName">EIC Investment-Ready</div>
             <div class="price">€6,900 <span class="fee">+ success fee</span></div>
-          </div>
-          <span class="tag">Stage 2 (invitation)</span>
+          </div><span class="tag">Stage 2 (invitation)</span>
           <ul>
             <li>Full Stage 2 proposal</li>
             <li>Financial plan & investment logic</li>
@@ -459,8 +710,10 @@
             <input type="email" name="email" placeholder="Email" required />
             <textarea name="message" placeholder="Message" required></textarea>
 
-            <!-- ✅ reCAPTCHA v2 widget -->
-            <div class="g-recaptcha" data-sitekey="6Le5Rn8sAAAAAHzIK6l9z0A90pCSS-bkt-TTx3-U"></div>
+            <!-- Visible reCAPTCHA v2 checkbox -->
+            <div class="captchaWrap">
+              <div class="g-recaptcha" data-sitekey="6Le5Rn8sAAAAAHzIK6l9z0A90pCSS-bkt-TTx3-U"></div>
+            </div>
 
             <button class="btn primary" type="submit">Send</button>
             <span class="microcopy">NDA on request. We typically reply within 24–48h.</span>
@@ -472,7 +725,8 @@
 
     <footer class="footer">
       <div>© 2026 EIC Readiness Studio · <a href="impressum.html">Impressum</a></div>
-      <div class="disclaimer">Independent proposal studio. Not affiliated with the European Innovation Council (EIC) or the European Commission.</div>
+      <div class="disclaimer">Independent proposal studio. Not affiliated with the European Innovation Council (EIC) or
+        the European Commission.</div>
     </footer>
   </div>
 
@@ -516,13 +770,42 @@
     }, observerOptions);
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ✅ Minimal UX: show "Sending..." but let the browser submit normally (no AJAX).
     const form = document.getElementById("contactForm");
     const statusEl = document.getElementById("formStatus");
-    if (form && statusEl) {
-      form.addEventListener("submit", () => {
-        statusEl.style.color = "";
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
         statusEl.textContent = "Sending...";
+        statusEl.style.color = "";
+
+        try {
+          // Ensure v2 checkbox was completed
+          const token = window.grecaptcha ? window.grecaptcha.getResponse() : "";
+          if (!token) {
+            statusEl.textContent = "Please confirm you’re not a robot.";
+            return;
+          }
+
+          const res = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { "Accept": "application/json" }
+          });
+
+          if (res.ok) {
+            statusEl.style.color = "#0f6b4f";
+            statusEl.textContent = "Thank you — message sent.";
+            form.reset();
+            if (window.grecaptcha) window.grecaptcha.reset();
+          } else {
+            statusEl.textContent = "Something went wrong. Please try again.";
+            if (window.grecaptcha) window.grecaptcha.reset();
+          }
+        } catch (err) {
+          statusEl.textContent = "Network error.";
+          if (window.grecaptcha) window.grecaptcha.reset();
+        }
       });
     }
   </script>
