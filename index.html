@@ -9,7 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <!-- ✅ reCAPTCHA v2 checkbox ("I'm not a robot") -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
   <style>
     :root {
       --bg: #f4f6f8;
@@ -46,7 +49,7 @@
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    
+
     body {
       margin: 0;
       background: var(--bg);
@@ -136,9 +139,9 @@
     h1 { margin: 0 0 24px; font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: 54px; line-height: 1.1; letter-spacing: -0.02em; }
     .sub { margin: 0 0 32px; color: var(--muted); font-size: 17px; line-height: 1.75; max-width: 62ch; }
     .sub strong { color: var(--ink); font-weight: 600; }
-    
+
     .hero-actions { display: flex; gap: 16px; margin-bottom: 32px; align-items: center; }
-    
+
     .pills { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
     .pill { border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; background: transparent; }
 
@@ -191,10 +194,10 @@
 
     @media (max-width: 1024px) { .layout { grid-template-columns: 1fr; gap: 48px; } .rail { position: static; background: var(--surface); backdrop-filter: none; } }
     @media (max-width: 640px) { .nav { grid-template-columns: 1fr; text-align: center; } .navLeft, .navRight { justify-content: center; } .process, .grid2 { grid-template-columns: 1fr; } .hero-actions { flex-direction: column; align-items: stretch; } }
-  </style>
 
-  <!-- reCAPTCHA v3 (site key) -->
-  <script src="https://www.google.com/recaptcha/api.js?render=6Le5Rn8sAAAAAHzIK6l9z0A90pCSS-bkt-TTx3-U"></script>
+    /* Optional: spacing for captcha block */
+    .g-recaptcha { margin-top: 6px; }
+  </style>
 </head>
 
 <body>
@@ -221,7 +224,7 @@
           <p class="kicker">EIC Accelerator · Stage 1 → Stage 2</p>
           <h1>EIC Readiness Studio</h1>
           <p class="sub">Build a <strong>fundable EIC case</strong> (Story + Evidence + Execution) — fast, focused, reviewer-aligned. No generic consulting. Only credible, high-probability cases.</p>
-          
+
           <div class="hero-actions">
             <a href="#contact" class="btn primary">Get GO/NO-GO in 7 days</a>
             <a href="full-scope.html" class="btn">See full scope</a>
@@ -259,6 +262,10 @@
             <input type="text" name="name" placeholder="Your name" required />
             <input type="email" name="email" placeholder="Email" required />
             <textarea name="message" placeholder="Message" required></textarea>
+
+            <!-- ✅ Visible "I'm not a robot" checkbox -->
+            <div class="g-recaptcha" data-sitekey="6Le5Rn8sAAAAAHzIK6l9z0A90pCSS-bkt-TTx3-U"></div>
+
             <button class="btn primary" type="submit">Send</button>
             <span class="microcopy">NDA on request. We typically reply within 24–48h.</span>
             <span id="formStatus" style="font-size: 12px; margin-top: 10px; display: block;"></span>
@@ -274,8 +281,6 @@
   </div>
 
   <script>
-    const RECAPTCHA_SITE_KEY = "6Le5Rn8sAAAAAHzIK6l9z0A90pCSS-bkt-TTx3-U";
-
     const themeBtn = document.getElementById("theme-btn");
     const sunIcon = document.getElementById("sun-icon");
     const moonIcon = document.getElementById("moon-icon");
@@ -318,39 +323,25 @@
     const form = document.getElementById("contactForm");
     const statusEl = document.getElementById("formStatus");
 
-    async function getRecaptchaToken(action) {
-      if (!window.grecaptcha || !window.grecaptcha.execute) {
-        throw new Error("reCAPTCHA not loaded");
-      }
-      return await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action });
-    }
-
     if (form) {
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
         statusEl.textContent = "Sending...";
         statusEl.style.color = "";
 
+        // ✅ require checkbox token
+        if (typeof grecaptcha !== "undefined") {
+          const token = grecaptcha.getResponse();
+          if (!token) {
+            statusEl.textContent = "Please confirm 'I’m not a robot'.";
+            return;
+          }
+        }
+
         try {
-          // Ensure grecaptcha is ready
-          await new Promise((resolve) => {
-            if (window.grecaptcha && window.grecaptcha.ready) {
-              window.grecaptcha.ready(resolve);
-            } else {
-              resolve();
-            }
-          });
-
-          const token = await getRecaptchaToken("contact");
-
-          const fd = new FormData(form);
-          // Standard field name used by reCAPTCHA integrations:
-          fd.set("g-recaptcha-response", token);
-
           const res = await fetch(form.action, {
             method: "POST",
-            body: fd,
+            body: new FormData(form),
             headers: { "Accept": "application/json" }
           });
 
@@ -358,10 +349,13 @@
             statusEl.style.color = "#0f6b4f";
             statusEl.textContent = "Thank you — message sent.";
             form.reset();
+            if (typeof grecaptcha !== "undefined") grecaptcha.reset();
           } else {
+            statusEl.style.color = "";
             statusEl.textContent = "Something went wrong. Please try again.";
           }
         } catch (err) {
+          statusEl.style.color = "";
           statusEl.textContent = "Network error.";
         }
       });
